@@ -14,16 +14,49 @@ import java.util.Date;
  */
 public interface AnniversaryEvent {
 
+    /**
+     * Set id of event. The event can always be requested via this Id. 
+     * @param id id of event used for fetching from service.
+     */
+    public void setId(String id);
+
+    /**
+     * @return NEVER NULL. id of event (used for fetching event from service).
+     */
+    public String getId();
+
+    /**
+     * Title of Event.
+     * @param title event title
+     */
+    public void setTitle(String title);
+
+    /**
+     * @return NEVER NULL. title of event
+     */
+    public String getTitle();
+
+    /**
+     * Set language of the event in ISO 639-1 (Alpha-2 code)
+     * @param lang language as 2 letter iso code 
+     */
+    public void setLanguage(String lang);
+
+    /**
+     * @return NEVER NULL. 2 letter ISO 639-1 code of language of event.
+     */
+    public String getLanguage();
+
 	/**
 	 * Set the lower limit of a time range or a single
 	 * point in time. Has to be set ! NEVER NULL !
-	 * @param from never NULL, lower limit of time range or a single point in time
+	 * @param from NEVER NULL, lower limit of time range or a single point in time
 	 */
 	public void setTimeRangeFrom(Date from);
 
 	/**
 	 * Get the lower limit of a time range or a single point in time
-	 * @return point in time (the lower limit or a single point, dependent from TO)
+	 * @return NEVER NULL. point in time (the lower limit of time range or a single point, dependent from TO)
 	 */
 	public Date getTimeRangeFrom();
 
@@ -37,7 +70,7 @@ public interface AnniversaryEvent {
 
 	/**
 	 * Get the upper limit of a time range.
-	 * @return null if there is only a single point in time (FROM)
+	 * @return null if there is only a single point in time (FROM) else upper limit of time range
 	 */
 	public Date getTimeRangeTo();
 }

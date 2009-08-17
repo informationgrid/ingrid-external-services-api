@@ -3,26 +3,21 @@
  */
 package de.ingrid.external;
 
-import de.ingrid.utils.IngridHitDetail;
+import java.util.Date;
+
+import de.ingrid.external.om.AnniversaryEvent;
 
 /**
- * Service for fetching Information of Anniversary Events.
+ * Service for fetching Anniversary Events from external service.
  */
 public interface AnniversaryService {
 
     /**
-     * Returns all found Anniversary of a given Date. This method uses a fallback strategy 
-     * of no aniversary was found for a particular day, month. It enlarges the search
-     * with the following fallbacks:
-     * 
-     *  1.) today
-     *  2.) this month
-     *  3.) year
-     * 
-     * @param date  The date to search anniveraries for.
+     * Returns all found Anniversary Events of a given Date.
+     * @param date  The "current" date to search anniversaries for.
      * @param lang  The language of the anniversary content.
-     * @return The DetailedTopic Array representing the anniversaries.
+     * @return array of found anniversary events or EMPTY array.
      */
-    IngridHitDetail[] getAnniversaries(java.util.Date date, String lang);
+	AnniversaryEvent[] getAnniversaries(Date date, String language);
 
 }
