@@ -10,7 +10,7 @@ import de.ingrid.utils.IngridHit;
 import de.ingrid.utils.IngridHitDetail;
 
 /**
- * Service for fetching Information for Almanac (Environment Events).
+ * Service for fetching similar terms of a given term.
  */
 public interface SimilarTermsService {
 

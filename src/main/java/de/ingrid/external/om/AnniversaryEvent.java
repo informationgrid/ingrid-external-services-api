@@ -6,11 +6,14 @@ package de.ingrid.external.om;
 import java.util.Date;
 
 /**
- * Representation of an Anniversary Event.<br>
+ * Representation of an Anniversary Event.<p>
+ * Mandatory content:
+ * <ul><li>Id<li>language<li>title<li>timeRangeFrom<br>
  * NOTICE: The time reference is set as time range FROM/TO.
  * FROM is never null. If TO is null then the time reference is
  * a single point in time (FROM). If TO is not null and > FROM
  * then the event refers to a time interval [FROM, TO].
+ * </ul>
  */
 public interface AnniversaryEvent {
 

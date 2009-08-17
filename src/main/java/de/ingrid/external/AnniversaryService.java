@@ -13,8 +13,8 @@ import de.ingrid.external.om.AnniversaryEvent;
 public interface AnniversaryService {
 
     /**
-     * Returns all found Anniversary Events of a given Date.
-     * @param date  The "current" date to search anniversaries for.
+     * Request Anniversary Events for a given Date.
+     * @param date  The date to search anniversaries for.
      * @param lang  The language of the anniversary content.
      * @return array of found anniversary events or EMPTY array.
      */

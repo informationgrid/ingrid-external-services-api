@@ -4,7 +4,7 @@
 package de.ingrid.external;
 
 /**
- * Service for fetching Information for Almanac (Environment Events).
+ * Service for fetching environment events for chronicle (almanac)
  */
 public interface ChronicleService {
 

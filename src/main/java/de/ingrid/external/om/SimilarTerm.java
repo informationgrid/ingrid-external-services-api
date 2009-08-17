@@ -4,7 +4,10 @@
 package de.ingrid.external.om;
 
 /**
- * Representation of a SimilarTerm.
+ * Representation of a SimilarTerm.<p>
+ * Mandatory content:
+ * <ul><li>term
+ * </ul>
  */
 public interface SimilarTerm {
 
