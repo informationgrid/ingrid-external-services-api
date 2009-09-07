@@ -11,7 +11,7 @@ import de.ingrid.external.om.Location;
 
 /**
  * Abstract interface (API) for accessing gazetteer.
- * A semantic unit of the gazetteer is encapsulated in a <code>Location</code>.
+ * The semantic unit of the gazetteer is a <code>Location</code> encapsulating all relevant data.
  */
 public interface GazeteerService {
 
@@ -21,7 +21,7 @@ public interface GazeteerService {
      * <br/>Enter text, click "Look-up Geographic Names" and click on found location
      * @param locationId the unique identifier of the source location
      * @param language which language, pass null if default language
-     * @return Array of related locations found for passed location
+     * @return Array of related locations found for passed location (or empty array)
      */
     Location[] getRelatedLocationsFromLocation(String locationId, Locale language);
 
@@ -32,7 +32,7 @@ public interface GazeteerService {
      * <br/>Enter text and click "Look-up Geographic Names"
      * @param text The text to classify. Multiple words, sentences etc.
      * @param language which language, pass null if default language
-     * @return Array of Locations found for text.
+     * @return Array of Locations found for text (or empty array)
      */
     Location[] getLocationsFromText(String text, Locale language);
 }
