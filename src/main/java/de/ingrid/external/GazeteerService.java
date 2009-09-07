@@ -30,6 +30,7 @@ public interface GazeteerService {
      * When using SNS the autoclassify method of SNS is used.
      * PortalU: http://localhost:8080/ingrid-portal/portal/search-extended/search-ext-env-place-geothesaurus.psml
      * <br/>Enter text and click "Look-up Geographic Names"
+     * Further used when search index (web sites etc.) is enriched with geographical info.
      * @param text arbitrary text to classify. Multiple words, sentences etc.
      * @param language which language, pass null if default language
      * @return Array of Locations found for text (or empty array)

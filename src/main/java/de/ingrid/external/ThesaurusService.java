@@ -33,6 +33,7 @@ public interface ThesaurusService {
      * When using SNS the autoclassify method of SNS is used.<br/>
      * PortalU: http://www.portalu.de/ingrid-portal/portal/search-extended/search-ext-env-topic-thesaurus.psml
      * <br/>Enter text and click "Thesaurus look-up"
+     * Further used when search index (web sites etc.) is enriched with thesaurus data.
      * @param text The text to classify. Multiple words, sentences etc.
      * @param language which language, pass null if default language
      * @return Array of thesaurus terms found for text (or empty array)
