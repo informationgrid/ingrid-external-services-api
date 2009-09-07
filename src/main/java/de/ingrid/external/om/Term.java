@@ -32,9 +32,6 @@ public interface Term {
 	 */
 	public String getName();
 
-
-	// ------------- SNS specific ? ----------------- //
-
 	/**
 	 * Set the alternate id of the term if present.
 	 * E.g. in SNS, ONE term can have different ids from different thesauri ! 

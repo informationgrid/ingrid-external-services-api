@@ -59,11 +59,21 @@ public interface ThesaurusService {
     Term getTerm(String termId, Locale language);
 
     /**
-     * Get all child terms of the given term. Used for browsing tree structure.
+     * Get all child terms of the given term in next level. Used for browsing tree structure.
      * PortalU: http://www.portalu.de/ingrid-portal/portal/search-catalog/search-catalog-thesaurus.psml
      * @param termId the unique identifier of the term to fetch subterms from. PASS NULL IF TOP TERMS WANTED !
      * @param language which language, pass null if default language
      * @return Array containing next level of terms (or empty array)
      */
     TreeTerm[] getHierarchyNextLevel(String termId, Locale language);
+
+    /**
+     * Get the path of terms to the top starting at term with given id.
+     * PortalU: used in IGE (InGridEditor) to show term in tree (open all parent nodes)
+     * @param termId the unique identifier of the term to determine parents.
+     * @param language which language, pass null if default language
+     * @return Array containing parent terms starting with term with given id.
+     *  index0=term with given id, index1=parent, index2=parent of parent, ... top node
+     */
+    TreeTerm[] getHierarchyPathToTop(String termId, Locale language);
 }
