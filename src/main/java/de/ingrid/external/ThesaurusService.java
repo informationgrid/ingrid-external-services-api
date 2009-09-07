@@ -13,15 +13,16 @@ import de.ingrid.external.om.TreeTerm;
 
 /**
  * Abstract interface (API) for accessing thesaurus.
- * The semantic unit of the thesaurus is a <code>Term</code> encapsulating all relevant data.
+ * The semantic unit of the thesaurus is a <code>Term</code> encapsulating all term data.
+ * Further context specific data is encapsulated in a <code>RelatedTerm</code> or <code>TreeTerm</code>.
  */
 public interface ThesaurusService {
 
     /**
-     * Get related names for a given name.<br/>
+     * Get related names of terms for a given arbitrary name.<br/>
      * PortalU: http://www.portalu.de/ingrid-portal/portal/main-search.psml?action=doSearch&q=water
      * <br/>Klick "Similar Terms: Search for ..."
-     * @param name The given name to search related names for.
+     * @param name arbitrary name to search related names of terms for.
      * @param language which language, pass null if default language
      * @return Array of related names (or empty array)
      */
