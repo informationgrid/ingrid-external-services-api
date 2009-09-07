@@ -35,16 +35,16 @@ public interface TreeTerm {
 	public boolean getHasChildren();
 
 	/**
-	 * Set whether the "term" is a label, meaning it's just a label in the tree hierarchy,
-	 * no real term and cannot be clicked.
-	 * @param isLabel true=no term, just a label, false=term is a real term
+	 * Set whether the "term" is a label, meaning it's just a label in the tree
+	 * hierarchy and cannot be clicked.
+	 * @param isLabel true=no term, just a label, false=real term which can be clicked
 	 */
 	public void setIsLabel(boolean isLabel);
 
 	/**
-	 * Get whether the "term" is a label, meaning it's just a label in the tree hierarchy,
-	 * no real term and cannot be clicked.
-	 * return true=no term, just a label, false=term is a real term
+	 * Get whether the "term" is a label, meaning it's just a label in the tree
+	 * hierarchy and cannot be clicked.
+	 * return true=no term, just a label, false=real term which can be clicked
 	 */
 	public boolean getIsLabel();
 }
