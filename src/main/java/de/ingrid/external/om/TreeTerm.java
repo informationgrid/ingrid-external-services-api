@@ -4,7 +4,7 @@
 package de.ingrid.external.om;
 
 /**
- * A term in a tree specifying the term and tree information.
+ * A term in a tree specifying the term and tree information.<p>
  */
 public interface TreeTerm {
 	
@@ -23,6 +23,18 @@ public interface TreeTerm {
 	public Term getTerm();
 
 	/**
+	 * Set whether term has a parent.
+	 * @param hasParent true=term has a parent, false=term is top node
+	 */
+	public void setHasParent(boolean hasParent);
+
+	/**
+	 * Get info whether term has a parent.
+	 * return true=term has a parent, false=term is top node, null=not evaluated yet
+	 */
+	public Boolean getHasParent();
+
+	/**
 	 * Set whether term has subterms.
 	 * @param hasChildren true=term has subterms, false=term is leaf
 	 */
@@ -30,21 +42,7 @@ public interface TreeTerm {
 
 	/**
 	 * Get info whether term has subterms.
-	 * return true=term has subterms, false=term is leaf
+	 * return true=term has subterms, false=term is leaf, null=not evaluated yet
 	 */
-	public boolean getHasChildren();
-
-	/**
-	 * Set whether the "term" is a label, meaning it's just a label in the tree
-	 * hierarchy and cannot be clicked.
-	 * @param isLabel true=no term, just a label, false=real term which can be clicked
-	 */
-	public void setIsLabel(boolean isLabel);
-
-	/**
-	 * Get whether the "term" is a label, meaning it's just a label in the tree
-	 * hierarchy and cannot be clicked.
-	 * return true=no term, just a label, false=real term which can be clicked
-	 */
-	public boolean getIsLabel();
+	public Boolean getHasChildren();
 }

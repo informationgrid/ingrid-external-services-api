@@ -12,8 +12,8 @@ import de.ingrid.external.om.TreeTerm;
 
 
 /**
- * Abstract interface (API) for accessing thesaurus.
- * The semantic unit of the thesaurus is a <code>Term</code> encapsulating all term data.
+ * Interface (API) for accessing thesaurus.<p>
+ * The semantic unit of the thesaurus is a <code>Term</code> encapsulating term data.
  * Further context specific data is encapsulated in a <code>RelatedTerm</code> or <code>TreeTerm</code>.
  */
 public interface ThesaurusService {
@@ -60,7 +60,7 @@ public interface ThesaurusService {
     Term getTerm(String termId, Locale language);
 
     /**
-     * Get all child terms of the given term in next level. Used for browsing tree structure.
+     * Get all direct child terms of the given term (next level). Used for browsing tree structure.
      * PortalU: http://www.portalu.de/ingrid-portal/portal/search-catalog/search-catalog-thesaurus.psml
      * @param termId the unique identifier of the term to fetch subterms from. PASS NULL IF TOP TERMS WANTED !
      * @param language which language, pass null if default language

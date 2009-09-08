@@ -4,9 +4,31 @@
 package de.ingrid.external.om;
 
 /**
- * Representation of a Thesaurus term.
+ * Representation of a Thesaurus term.<p>
  */
 public interface Term {
+
+	/** Type of the term. */
+	public enum TermType {
+		/** the term is a fully qualified term and can be used as a describing term. The standard ! */
+		DESCRIPTOR,
+		/** the term is just a synonym and should not be used as describing term (SNS specific?) */
+		NON_DESCRIPTOR,
+		/** the term is just a label in the hierarchy and should not be used as describing term (SNS specific?) */
+		NODE_LABEL;
+	}
+
+	/**
+	 * Set the type of the term.
+	 * @param type type of term, NEVER NULL
+	 */
+	public void setType(TermType type);
+
+	/**
+	 * Get the type of the term.
+	 * @return type of term, NEVER NULL
+	 */
+	public TermType getType();
 
 	/**
 	 * Set the id of the term. 

@@ -4,20 +4,18 @@
 package de.ingrid.external.om;
 
 /**
- * A related term specifying the term and the type of the relation.
+ * A related term specifying the term and the type of the relation.<p>
  */
 public interface RelatedTerm {
 	
 	/** Type of the relation to the term */
 	public enum RelationType {
-		/** the related term is a synonym and should not be used as describing term (SNS specific) */
-		SYNONYM,
 		/** the related term is a parent */
 		PARENT,
 		/** the related term is a child */
 		CHILD,
-		/** the related term is a sibling */
-		SIBLING;
+		/** the related term is somehow connected to the term (sibling or something else) */
+		RELATIVE;
 	}
 
 	/**
