@@ -16,6 +16,7 @@ public interface FullClassifyService {
 	
     /**
      * Analyze the given URL. Extract terms, locations etc..
+     * Used in the Metada-Editor when a new object is created for suggestion of contents !    
      * @param url The url to analyze.
      * @param analyzeMaxWords The maximal number of words to analyze (body)
      * @param ignoreCase Set to true ignore capitalization of the document.
