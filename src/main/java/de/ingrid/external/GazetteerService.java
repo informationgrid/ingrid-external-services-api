@@ -13,7 +13,7 @@ import de.ingrid.external.om.Location;
  * Interface (API) for accessing gazetteer.<p>
  * The basic semantic unit of the gazetteer is a <code>Location</code> encapsulating location data.
  */
-public interface GazeteerService {
+public interface GazetteerService {
 
     /**
      * Get all related gazetteer-locations of a given gazetteer-location.<br/>

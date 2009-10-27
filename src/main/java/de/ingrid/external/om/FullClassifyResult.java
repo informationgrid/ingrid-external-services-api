@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Result of a FULL classify request for a document or url.<p>
- * Contains info about the document and found thesaurus terms / gazeteer locations.
+ * Contains info about the document and found thesaurus terms / gazetteer locations.
  */
 public interface FullClassifyResult {
 
@@ -33,14 +33,14 @@ public interface FullClassifyResult {
 	public void setTerms(List<Term> terms);
 
 	/**
-	 * Get the gazeteer locations found in classification.  
-	 * @return list of gazeteer locations or empty list
+	 * Get the gazetteer locations found in classification.  
+	 * @return list of gazetteer locations or empty list
 	 */
 	public List<Location> getLocations();
 
 	/**
-	 * Set the gazeteer locations found in classification.  
-	 * @param locations list of gazeteer locations or empty list
+	 * Set the gazetteer locations found in classification.  
+	 * @param locations list of gazetteer locations or empty list
 	 */
 	public void setLocations(List<Location> locations);
 }

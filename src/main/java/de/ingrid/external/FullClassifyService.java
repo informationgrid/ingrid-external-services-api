@@ -21,7 +21,7 @@ public interface FullClassifyService {
      * the wizard. There a URL can be entered, the API is called and the wizard
      * shows the results as suggestion for the content of the new record
      * <li>used in iPlug when indexing content (e.g. webpages) to enrich the
-     * index with thesaurus, gazeteer, time information etc. Then this additional data
+     * index with thesaurus, gazetteer, time information etc. Then this additional data
      * can be queried from the Portal (e.g. when searching for a thesaurus term)
      * delivering the according content (e.g. the webpage)
      * </ul>
