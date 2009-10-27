@@ -4,17 +4,25 @@
 package de.ingrid.external.om;
 
 /**
- * Representation of a Thesaurus term.<p>
+ * Basic semantic unit of a Thesaurus.<p>
+ * Mandatory content (NOT NULL):
+ * <ul><li><code>id</code>: arbitrary unique identifier of the term in the thesaurus 
+ * <li><code>type</code>: the type of the term.
+ * <li><code>name</code>: the name of the term
+ * </ul>
  */
 public interface Term {
 
 	/** Type of the term. */
 	public enum TermType {
-		/** the term is a fully qualified term and can be used as a describing term. The standard ! */
+		/** the term is a fully qualified term and can be used as a describing
+		 * term in meta data. The standard ! */
 		DESCRIPTOR,
-		/** the term is just a synonym and should not be used as describing term (SNS specific?) */
+		/** the term is just a synonym for another term and should not be used
+		 * as a describing term in meta data (utilized in SNS) */
 		NON_DESCRIPTOR,
-		/** the term is just a label in the hierarchy and should not be used as describing term (SNS specific?) */
+		/** the term is just a label in the hierarchy and should not be used
+		 * as a describing term in meta data (utilized in SNS) */
 		NODE_LABEL;
 	}
 
@@ -55,30 +63,30 @@ public interface Term {
 	public String getName();
 
 	/**
-	 * Set the alternate id of the term if present.
-	 * E.g. in SNS, ONE term can have different ids from different thesauri ! 
-	 * @param alternateId the alternate id of the term. Null per default. 
+	 * Set the alternate id of the term if present.<br/>
+	 * Utilized in SNS where ONE term can have different ids dependent from used thesaurus ! 
+	 * @param alternateId the alternate id of the term (utilized in SNS). NULL per default. 
 	 */
 	public void setAlternateId(String alternateId);
 
 	/**
-	 * Get the alternate id of the term if present.
-	 * E.g. in SNS, ONE term can have different ids from different thesauri ! 
-	 * return the alternate id of the term if present. Null per default. 
+	 * Get the alternate id of the term if present.<br/>
+	 * Utilized in SNS where ONE term can have different ids dependent from used thesaurus ! 
+	 * @return the alternate id of the term if present (utilized in SNS). NULL per default. 
 	 */
 	public String getAlternateId();
 
 	/**
-	 * Set the alternate name of the term if present.
-	 * E.g. in SNS, ONE term can have different names from different thesauri ! 
-	 * @param alternateName the alternate name of the term. Null per default. 
+	 * Set the alternate name of the term if present.<br/>
+	 * Utilized in SNS where ONE term can have different names dependent from used thesaurus ! 
+	 * @param alternateName the alternate name of the term (utilized in SNS). NULL per default. 
 	 */
 	public void setAlternateName(String alternateName);
 
 	/**
-	 * Get the alternate name of the term if present.
-	 * E.g. in SNS, ONE term can have different names from different thesauri ! 
-	 * return the alternate name of the term if present. Null per default. 
+	 * Get the alternate name of the term if present.<br/>
+	 * Utilized in SNS where ONE term can have different names dependent from used thesaurus ! 
+	 * @return the alternate name of the term if present (utilized in SNS). NULL per default. 
 	 */
 	public String getAlternateName();
 }

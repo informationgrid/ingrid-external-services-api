@@ -4,41 +4,46 @@
 package de.ingrid.external.om;
 
 /**
- * A related term specifying the term and the type of the relation.<p>
+ * Representation of a related gazetteer term.
+ * Specifies the term itself and the type of its relation.<p>
+ * Mandatory content (NOT NULL):
+ * <ul><li><code>relatedTerm</code>: the related term.
+ * <li><code>relationType</code>: the type of the relation.
+ * </ul>
  */
 public interface RelatedTerm {
 	
-	/** Type of the relation to the term */
+	/** Type of the relation of this term */
 	public enum RelationType {
-		/** the related term is a parent */
+		/** term is a parent */
 		PARENT,
-		/** the related term is a child */
+		/** term is a child */
 		CHILD,
-		/** the related term is somehow connected to the term (sibling or something else) */
+		/** term is somehow connected (e.g. sibling or something else) */
 		RELATIVE;
 	}
 
 	/**
-	 * Set the related term. 
-	 * @param term the related term
+	 * Set the term.
+	 * @param term the related term, NOT NULL
 	 */
-	public void setRelatedTerm(Term term);
+	public void setTerm(Term term);
 
 	/**
-	 * Get the related term.
-	 * @return the related term
+	 * Get the term.
+	 * @return the related term, NOT NULL
 	 */
-	public Term getRelatedTerm();
+	public Term getTerm();
 
 	/**
-	 * Set the type of the relation.
-	 * @param type type of relation
+	 * Set the type of the relation of this term.
+	 * @param type type of relation of this term, NOT NULL
 	 */
 	public void setRelationType(RelationType type);
 
 	/**
-	 * Get the type of the relation.
-	 * @return type of relation
+	 * Get the type of the relation of this term.
+	 * @return type of relation of this term, NOT NULL
 	 */
 	public RelationType getRelationType();
 }

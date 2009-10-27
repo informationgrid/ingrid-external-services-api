@@ -4,33 +4,44 @@
 package de.ingrid.external.om;
 
 /**
- * A term in a tree specifying the term and tree information.<p>
+ * Representation of a thesaurus term in a tree.
+ * Specifies the term itself and tree information.<p>
+ * Mandatory content (NOT NULL):
+ * <ul><li><code>term</code>: the term in the tree.
+ * </ul>
+ * Optionally delivered information, dependent from context:
+ * <ul><li><code>hasChildren</code>: specifies whether the term has children.
+ * Determines whether a next hierarchy level can be requested when browsing
+ * a tree. May not be set, e.g. if path to top is requested, then lowest node
+ * may not have been evaluated yet concerning its children.
+ * <li><code>hasParent</code>: specifies whether the term has a parent (is top
+ * node or not). May not be set, e.g. if children of a node are requested, then
+ * the node may not have been evaluated concerning its parent. 
+ * </ul>
  */
 public interface TreeTerm {
 	
 	/**
-	 * Set the tree term. NOTICE: Can also be a label and no real term,
-	 * see below <code>setIsLabel</code>
-	 * @param term the tree term
+	 * Set the term. NOTICE: Term can be of different type ("label" ...).
+	 * @param term the tree term, NOT NULL
 	 */
 	public void setTerm(Term term);
 
 	/**
-	 * Get the tree term. NOTICE: Can also be a label and no real term,
-	 * see below <code>setIsLabel</code>
-	 * @return the tree term
+	 * Get the term. NOTICE: Term can be of different type ("label" ...).
+	 * @return the tree term, NOT NULL
 	 */
 	public Term getTerm();
 
 	/**
-	 * Set whether term has a parent.
+	 * Set whether the term has a parent.
 	 * @param hasParent true=term has a parent, false=term is top node
 	 */
 	public void setHasParent(boolean hasParent);
 
 	/**
 	 * Get info whether term has a parent.
-	 * return true=term has a parent, false=term is top node, null=not evaluated yet
+	 * @return true=term has a parent, false=term is top node, NULL=not evaluated yet
 	 */
 	public Boolean getHasParent();
 
@@ -41,8 +52,9 @@ public interface TreeTerm {
 	public void setHasChildren(boolean hasChildren);
 
 	/**
-	 * Get info whether term has subterms.
-	 * return true=term has subterms, false=term is leaf, null=not evaluated yet
+	 * Get info whether term has subterms.<br/>
+	 * Determines whether a next hierarchy level can be requested when browsing a tree.
+	 * @return true=term has subterms, false=term is leaf, null=not evaluated yet
 	 */
 	public Boolean getHasChildren();
 }

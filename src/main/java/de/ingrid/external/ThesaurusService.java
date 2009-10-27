@@ -13,46 +13,52 @@ import de.ingrid.external.om.TreeTerm;
 
 /**
  * Interface (API) for accessing thesaurus.<p>
- * The semantic unit of the thesaurus is a <code>Term</code> encapsulating term data.
+ * The basic semantic unit of the thesaurus is a <code>Term</code> encapsulating basic information of the term like name, id etc.
  * Further context specific data is encapsulated in a <code>RelatedTerm</code> or <code>TreeTerm</code>.
  */
 public interface ThesaurusService {
 
     /**
-     * Get related names of terms for a given arbitrary name.<br/>
+     * Get related names of thesaurus terms for a given arbitrary word.<br/>
      * PortalU: http://www.portalu.de/ingrid-portal/portal/main-search.psml?action=doSearch&q=water
      * <br/>Klick "Similar Terms: Search for ..."
-     * @param name arbitrary name to search related names of terms for.
-     * @param language which language, pass null if default language
-     * @return Array of related names (or empty array)
+     * @param name arbitrary word to search names of thesaurus terms for.
+     * @param language request results in this language. If passed language can't be processed
+     * 		or is null then default language may be used (PortalU: de, GS Soil: en)
+     * @return Array of related names of thesaurus terms (or empty array)
      */
     String[] getRelatedNamesFromName(String name, Locale language);
 
     /**
      * Classify a text meaning get thesaurus terms describing the text.
      * When using SNS the autoclassify method of SNS is used.<br/>
+     * <ul><li>used in Portal Extended Search for look up of thesaurus terms from arbitrary
+     * entered text see<br/>
      * PortalU: http://www.portalu.de/ingrid-portal/portal/search-extended/search-ext-env-topic-thesaurus.psml
      * <br/>Enter text and click "Thesaurus look-up"
-     * Further used when search index (web sites etc.) is enriched with thesaurus data.
-     * @param text The text to classify. Multiple words, sentences etc.
-     * @param language which language, pass null if default language
+     * </ul>
+     * @param text arbitrary text to classify. Multiple words, sentences etc.
+     * @param analyzeMaxWords The maximal number of words to analyze
+     * @param ignoreCase Set to true to ignore capitalization of the text
+     * @param language language of the text and the results. If passed language can't be processed
+     * 		or is null then default language may be used (PortalU: de, GS Soil: en)
      * @return Array of thesaurus terms found for text (or empty array)
      */
-    Term[] getTermsFromText(String text, Locale language);
+    Term[] getTermsFromText(String text, int analyzeMaxWords, boolean ignoreCase, Locale language);
 
     /**
      * Get all related terms for a given term.<br/>
      * PortalU: http://www.portalu.de/ingrid-portal/portal/search-extended/search-ext-env-topic-thesaurus.psml
      * <br/>Enter text, click "Thesaurus look-up" and click on found term
-     * @param termId the unique identifier of the source term in thesaurus
+     * @param termId the unique identifier of the term to found related terms from
      * @param language which language, pass null if default language
-     * @return Array of related terms found for passed term (or empty array)
+     * @return Array of related terms for passed term (or empty array)
      */
     RelatedTerm[] getRelatedTermsFromTerm(String termId, Locale language);
 
     /**
      * Get term with given id.<br/>
-     * PortalU: Used for getting detailed term data, e.g. when term is clicked in extended search browser
+     * PortalU: Used for getting detailed term data, e.g. when term is clicked in term browser in extended search.
      * @param termId the unique identifier of the term in thesaurus
      * @param language which language, pass null if default language
      * @return the found term or null if not found
@@ -64,17 +70,18 @@ public interface ThesaurusService {
      * PortalU: http://www.portalu.de/ingrid-portal/portal/search-catalog/search-catalog-thesaurus.psml
      * @param termId the unique identifier of the term to fetch subterms from. PASS NULL IF TOP TERMS WANTED !
      * @param language which language, pass null if default language
-     * @return Array containing next level of terms (or empty array)
+     * @return Array containing next level of terms (or empty array).
+     * NOTICE: terms in array should have informations whether they have children !
      */
     TreeTerm[] getHierarchyNextLevel(String termId, Locale language);
 
     /**
      * Get the path of terms to the top starting at term with given id.
      * PortalU: used in IGE (InGridEditor) to show term in tree (open all parent nodes)
-     * @param termId the unique identifier of the term to determine parents.
+     * @param termId the unique identifier of the term to determine parents from.
      * @param language which language, pass null if default language
-     * @return Array containing parent terms starting with term with given id.
-     *  index0=term with given id, index1=parent, index2=parent of parent, ... top node
+     * @return Array containing parent terms of passed term, starting with passed term.
+     *  index0=term of passed id, index1=parent, index2=parent of parent, ... top node
      */
     TreeTerm[] getHierarchyPathToTop(String termId, Locale language);
 }
