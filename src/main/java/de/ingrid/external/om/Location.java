@@ -55,20 +55,37 @@ public interface Location {
 	 */
 	public float[] getBoundingBox();
 
+	/**
+	 * Set the type id of the location, e.g. when using SNS
+	 * this is an identifier indicating a Nature Park ("naturalParkType") or Federal State ("use2Type") ...
+	 * @param typeId the id of the type of the location (utilized in SNS) 
+     * @see setTypeName
+	 */
+	public void setTypeId(String typeId);
 
 	/**
-	 * Set the type of the location (key), e.g. when using SNS
-	 * this is a key for a Community, Nature Park, Federal State ...
-	 * @param type type of location (key)
+	 * Get the type id of the location, e.g. when using SNS
+	 * this is an identifier indicating a Nature Park ("naturalParkType") or Federal State ("use2Type") ...
+	 * @return the id of the type of the location (utilized in SNS) or NULL
+     * @see getTypeName
 	 */
-	public void setType(String type);
+	public String getTypeId();
 
 	/**
-	 * Get the type of the location (key), e.g. when using SNS
-	 * this is a key for a Community, Nature Park, Federal State ...
-	 * @return the type of the location (key) or NULL
+	 * Set the according name of the type of the location, e.g. when using SNS
+	 * this is "Nature Park" (for type id "naturalParkType") or "Federal State" (for type id "use2Type") ...
+	 * @param typeName the according name of the type id of the location (utilized in SNS)
+     * @see setTypeId
 	 */
-	public String getType();
+	public void setTypeName(String typeName);
+
+	/**
+	 * Get the according name of the type of the location, e.g. when using SNS
+	 * this is "Nature Park" (for type id "naturalParkType") or "Federal State" (for type id "use2Type") ...
+	 * @return the according name of the type id of the location (utilized in SNS) or NULL
+     * @see getTypeId
+	 */
+	public String getTypeName();
 
 	/**
 	 * Set the additional qualifier of the location, e.g. name affix.
