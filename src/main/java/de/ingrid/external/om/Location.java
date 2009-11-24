@@ -89,27 +89,27 @@ public interface Location {
 
 	/**
 	 * Set the additional qualifier of the location, e.g. name affix.
-	 * @param qualifier additional qualifier of location
+	 * @param qualifier additional qualifier of location (utilized in SNS)
 	 */
 	public void setQualifier(String qualifier);
 
 	/**
 	 * Get the additional qualifier of the location, e.g. name affix.
-	 * @return additional qualifier of location or NULL
+	 * @return additional qualifier of location (utilized in SNS) or NULL
 	 */
 	public String getQualifier();
 
 	/**
 	 * Set the native key of the location, e.g. when using SNS
 	 * this is a "regional key" (RS) or "commune key" (AGS).
-	 * @param nativeKey defined code of the location
+	 * @param nativeKey defined code of the location (utilized in SNS)
 	 */
 	public void setNativeKey(String nativeKey);
 
 	/**
 	 * Get the native key of the location, e.g. when using SNS
 	 * this is a "regional key" (RS) or "commune key" (AGS).
-	 * @return defined code of the location or NULL
+	 * @return defined code of the location (utilized in SNS) or NULL
 	 */
 	public String getNativeKey();
 }
