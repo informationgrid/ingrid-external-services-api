@@ -7,7 +7,10 @@ import java.util.Locale;
 /**
  * Part of the result of a FULL classify request for a document or url.<p>
  * Contains general extracted info of the document/url.
- */
+  * Mandatory content (NOT NULL):
+ * <ul><li><code>ClassifyTimeStamp</code>: the date the classification was executed
+ * </ul>
+*/
 public interface IndexedDocument {
 
 	/**
@@ -35,16 +38,16 @@ public interface IndexedDocument {
 	public void setDescription(String description);
 
 	/**
-	 * Get the URI of the document (if web document was classified)
-	 * @return URI or null
+	 * Get the URL of the document (if web document was classified)
+	 * @return URL or null
 	 */
-	public URL getUri();
+	public URL getURL();
 
 	/**
-	 * Set the URI of the document (if web document was classified)
-	 * @param uri URI of the web document
+	 * Set the URL of the document (if web document was classified)
+	 * @param url URL of the web document
 	 */
-	public void setUri(URL uri);
+	public void setURL(URL url);
 
 	/**
 	 * Get the extracted language of the document.

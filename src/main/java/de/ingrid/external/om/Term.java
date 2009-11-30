@@ -3,6 +3,8 @@
  */
 package de.ingrid.external.om;
 
+import java.util.List;
+
 /**
  * Basic semantic unit of a Thesaurus.<p>
  * Mandatory content (NOT NULL):
@@ -78,15 +80,27 @@ public interface Term {
 
 	/**
 	 * Set the alternate name of the term if present.<br/>
-	 * Utilized in SNS where ONE term can have different names dependent from used thesaurus ! 
+	 * Utilized in SNS where a term can have a different name dependent from used thesaurus ! 
 	 * @param alternateName the alternate name of the term (utilized in SNS). NULL per default. 
 	 */
 	public void setAlternateName(String alternateName);
 
 	/**
 	 * Get the alternate name of the term if present.<br/>
-	 * Utilized in SNS where ONE term can have different names dependent from used thesaurus ! 
+	 * Utilized in SNS where a term can have a different name dependent from used thesaurus ! 
 	 * @return the alternate name of the term if present (utilized in SNS). NULL per default. 
 	 */
 	public String getAlternateName();
+
+	/**
+	 * Set a list of Inspire Themes the term is related to (utilized in SNS).
+	 * @param inspireThemes list of inspire themes
+	 */
+	public void setInspireThemes(List<String> inspireThemes);
+
+	/**
+	 * Get a list of Inspire Themes the term is related to (utilized in SNS).
+	 * @return list of inspire themes. NULL per default
+	 */
+	public List<String> getInspireThemes();
 }
