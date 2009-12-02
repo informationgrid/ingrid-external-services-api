@@ -10,7 +10,7 @@ import de.ingrid.external.om.FullClassifyResult;
 
 
 /**
- * Service used for extracting ARBITRARY describing data (meta data like terms, locations, ...) from document or URL.<p>
+ * Service used for extracting data (e.g. meta data like terms, locations, ...) from document or URL.<p>
  */
 public interface FullClassifyService {
 	

@@ -20,8 +20,9 @@ public interface ThesaurusService {
 
     /**
      * Get related names of thesaurus terms for a given arbitrary word.<br/>
-     * PortalU: http://www.portalu.de/ingrid-portal/portal/main-search.psml?action=doSearch&q=water
+     * <ul><li>PortalU: http://www.portalu.de/ingrid-portal/portal/main-search.psml?action=doSearch&q=water
      * <br/>Klick "Similar Terms: Search for ..."
+     * </ul>
      * @param name arbitrary word to search names of thesaurus terms for.
      * @param language request results in this language. If passed language can't be processed
      * 		or is null then default language may be used (PortalU: de, GS Soil: en)
@@ -48,8 +49,9 @@ public interface ThesaurusService {
 
     /**
      * Get all related terms for a given term.<br/>
-     * PortalU: http://www.portalu.de/ingrid-portal/portal/search-extended/search-ext-env-topic-thesaurus.psml
+     * <ul><li>PortalU: http://www.portalu.de/ingrid-portal/portal/search-extended/search-ext-env-topic-thesaurus.psml
      * <br/>Enter text, click "Thesaurus look-up" and click on found term
+     * </ul>
      * @param termId the unique identifier of the term to found related terms from
      * @param language which language, pass null if default language
      * @return Array of related terms for passed term (or empty array)
@@ -58,16 +60,19 @@ public interface ThesaurusService {
 
     /**
      * Get term with given id.<br/>
-     * PortalU: Used for getting detailed term data, e.g. when term is clicked in term browser in extended search.
+     * <ul><li>PortalU: Used for getting detailed term data, e.g. when term is clicked in term browser in extended search.
+     * </ul>
      * @param termId the unique identifier of the term in thesaurus
-     * @param language which language, pass null if default language
+     * @param language which language to fetch, pass null if default language.
+     * 	NOTICE: may be ignored by service if termId already determines language !
      * @return the found term or null if not found
      */
     Term getTerm(String termId, Locale language);
 
     /**
      * Get all direct child terms of the given term (next level). Used for browsing tree structure.
-     * PortalU: http://www.portalu.de/ingrid-portal/portal/search-catalog/search-catalog-thesaurus.psml
+     * <ul><li>PortalU: http://www.portalu.de/ingrid-portal/portal/search-catalog/search-catalog-thesaurus.psml
+     * </ul>
      * @param termId the unique identifier of the term to fetch subterms from. PASS NULL IF TOP TERMS WANTED !
      * @param language which language, pass null if default language
      * @return Array containing next level of terms (or empty array).
@@ -77,7 +82,8 @@ public interface ThesaurusService {
 
     /**
      * Get the path of terms to the top starting at term with given id.
-     * PortalU: used in IGE (InGridEditor) to show term in tree (open all parent nodes)
+     * <ul><li>PortalU: used in IGE (InGridEditor) to show term in tree (open all parent nodes)
+     * </ul>
      * @param termId the unique identifier of the term to determine parents from.
      * @param language which language, pass null if default language
      * @return Array containing parent terms of passed term, starting with passed term.
