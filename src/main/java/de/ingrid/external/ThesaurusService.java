@@ -31,7 +31,7 @@ public interface ThesaurusService {
     String[] getRelatedNamesFromName(String name, Locale language);
 
     /**
-     * Classify a text meaning get thesaurus terms describing the text.
+     * Classify a text meaning get thesaurus <b>DESCRIPTOR</b> terms describing the text.
      * When using SNS the autoclassify method of SNS is used.<br/>
      * <ul><li>used in Portal Extended Search for look up of thesaurus terms from arbitrary
      * entered text see<br/>
@@ -43,7 +43,7 @@ public interface ThesaurusService {
      * @param ignoreCase Set to true to ignore capitalization of the text
      * @param language language of the text and the results. If passed language can't be processed
      * 		or is null then default language may be used (PortalU: de, GS Soil: en)
-     * @return Array of thesaurus terms found for text (or empty array)
+     * @return Array of thesaurus <b>DESCRIPTOR</b> terms found for text (or empty array)
      */
     Term[] getTermsFromText(String text, int analyzeMaxWords, boolean ignoreCase, Locale language);
 
