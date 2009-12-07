@@ -4,14 +4,14 @@
 package de.ingrid.external.om;
 
 /**
- * Representation of a related gazetteer term.
- * Specifies the term itself and the type of its relation.<p>
+ * Representation of a gazetteer term RELATED TO ANOTHER ONE.
+ * Adds additional relation information to the term.<p>
  * Mandatory content (NOT NULL):
- * <ul><li><code>relatedTerm</code>: the related term.
+ * <ul><li>see <code>Term</code>
  * <li><code>relationType</code>: the type of the relation.
  * </ul>
  */
-public interface RelatedTerm {
+public interface RelatedTerm extends Term {
 	
 	/** Type of the relation of this term */
 	public enum RelationType {
@@ -22,18 +22,6 @@ public interface RelatedTerm {
 		/** term is somehow connected (e.g. sibling or something else) */
 		RELATIVE;
 	}
-
-	/**
-	 * Set the term.
-	 * @param term the related term, NOT NULL
-	 */
-	public void setTerm(Term term);
-
-	/**
-	 * Get the term.
-	 * @return the related term, NOT NULL
-	 */
-	public Term getTerm();
 
 	/**
 	 * Set the type of the relation of this term.

@@ -4,10 +4,10 @@
 package de.ingrid.external.om;
 
 /**
- * Representation of a thesaurus term in a tree.
- * Specifies the term itself and tree information.<p>
+ * Representation of a thesaurus term IN A TREE.
+ * Adds additional tree information to the term.<p>
  * Mandatory content (NOT NULL):
- * <ul><li><code>term</code>: the term in the tree.
+ * <ul><li>see <code>Term</code>
  * </ul>
  * Optionally delivered information, dependent from context:
  * <ul><li><code>hasChildren</code>: specifies whether the term has children.
@@ -19,20 +19,8 @@ package de.ingrid.external.om;
  * the node may not have been evaluated concerning its parent. 
  * </ul>
  */
-public interface TreeTerm {
+public interface TreeTerm extends Term {
 	
-	/**
-	 * Set the term. NOTICE: Term can be of different type ("label" ...).
-	 * @param term the tree term, NOT NULL
-	 */
-	public void setTerm(Term term);
-
-	/**
-	 * Get the term. NOTICE: Term can be of different type ("label" ...).
-	 * @return the tree term, NOT NULL
-	 */
-	public Term getTerm();
-
 	/**
 	 * Set whether the term has a parent.
 	 * @param hasParent true=term has a parent, false=term is top node
