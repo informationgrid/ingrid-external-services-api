@@ -19,16 +19,16 @@ import de.ingrid.external.om.TreeTerm;
 public interface ThesaurusService {
 
     /**
-     * Get related names of thesaurus terms for a given arbitrary word.<br/>
+     * Get similar thesaurus terms for a given arbitrary word/name.<br/>
      * <ul><li>PortalU: http://www.portalu.de/ingrid-portal/portal/main-search.psml?action=doSearch&q=water
      * <br/>Klick "Similar Terms: Search for ..."
      * </ul>
-     * @param name arbitrary word to search names of thesaurus terms for.
-     * @param language request results in this language. If passed language can't be processed
+     * @param name arbitrary word to search thesaurus terms for.
+     * @param language language of the name and the results. If passed language can't be processed
      * 		or is null then default language may be used (PortalU: de, GS Soil: en)
-     * @return Array of related names of thesaurus terms (or empty array)
+     * @return Array of related thesaurus terms (or empty array)
      */
-    String[] getRelatedNamesFromName(String name, Locale language);
+	Term[] getTermsFromName(String name, Locale language);
 
     /**
      * Classify a text meaning get thesaurus <b>DESCRIPTOR</b> terms describing the text.
