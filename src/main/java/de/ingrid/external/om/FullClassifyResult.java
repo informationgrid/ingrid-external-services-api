@@ -3,8 +3,9 @@ package de.ingrid.external.om;
 import java.util.List;
 
 /**
- * Result of a FULL classify request for a document or url.<p>
- * Contains info about the document and found thesaurus terms / gazetteer locations etc.<br/>
+ * Result of a FULL classify request for a document/url.<p>
+ * Contains info about the document and found thesaurus terms / gazetteer locations / 
+ * events (utilized by SNS) ...<br/>
  * Mandatory content (NOT NULL):
  * <ul><li><code>IndexedDocument</code>: Contains general extracted info of the document/url
  * </ul>

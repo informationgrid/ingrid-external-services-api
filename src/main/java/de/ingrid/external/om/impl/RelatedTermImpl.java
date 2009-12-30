@@ -20,7 +20,7 @@ public class RelatedTermImpl extends TermImpl implements RelatedTerm {
 	}
 
 	public String toString() {
-		String result = this.relationType + " " + super.toString();
+		String result = "relationType: " + this.relationType + " " + super.toString();
 		return result;
 	}
 }

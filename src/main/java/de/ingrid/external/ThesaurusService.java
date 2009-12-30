@@ -70,24 +70,31 @@ public interface ThesaurusService {
     Term getTerm(String termId, Locale language);
 
     /**
-     * Get all direct child terms of the given term (next level). Used for browsing tree structure.
+     * Get all direct child terms of the given term (next level). Used for browsing tree structure.</br>
+     * <b>NOTICE: returned tree terms contain information about their parent and children, where possible,
+     * see <code>TreeTerm</code></b> 
      * <ul><li>PortalU: http://www.portalu.de/ingrid-portal/portal/search-catalog/search-catalog-thesaurus.psml
      * </ul>
      * @param termId the unique identifier of the term to fetch subterms from. PASS NULL IF TOP TERMS WANTED !
      * @param language which language, pass null if default language
-     * @return Array containing next level of terms (or empty array).
-     * NOTICE: terms in array should have informations whether they have children !
+     * @return Array containing next level of terms (or empty array if leaf).
+     * <b>NOTICE: tree terms in array should have information about their parent and children, where possible,
+     * see <code>TreeTerm</code></b> 
      */
     TreeTerm[] getHierarchyNextLevel(String termId, Locale language);
 
     /**
      * Get the path of terms to the top starting at term with given id.
+     * <b>NOTICE: returned tree terms contain information about their parent and children, where possible,
+     * see <code>TreeTerm</code></b> 
      * <ul><li>PortalU: used in IGE (InGridEditor) to show term in tree (open all parent nodes)
      * </ul>
      * @param termId the unique identifier of the term to determine parents from.
      * @param language which language, pass null if default language
      * @return Array containing parent terms of passed term, starting with passed term.
      *  index0=term of passed id, index1=parent, index2=parent of parent, ... top node
+     * <b>NOTICE: tree terms in array should have information about their parent and children, where possible,
+     * see <code>TreeTerm</code></b> 
      */
     TreeTerm[] getHierarchyPathToTop(String termId, Locale language);
 }

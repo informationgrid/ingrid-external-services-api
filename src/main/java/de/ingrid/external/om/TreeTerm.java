@@ -3,46 +3,55 @@
  */
 package de.ingrid.external.om;
 
+import java.util.List;
+
 /**
  * Representation of a thesaurus term IN A TREE.
- * Adds additional tree information to the term.<p>
+ * Adds additional info about parent and children in hierarchy.<p>
  * Mandatory content (NOT NULL):
  * <ul><li>see <code>Term</code>
  * </ul>
  * Optionally delivered information, dependent from context:
- * <ul><li><code>hasChildren</code>: specifies whether the term has children.
+ * <ul><li><code>children</code>: specifies whether the term has children.
  * Determines whether a next hierarchy level can be requested when browsing
- * a tree. May not be set, e.g. if path to top is requested, then lowest node
- * may not have been evaluated yet concerning its children.
- * <li><code>hasParent</code>: specifies whether the term has a parent (is top
- * node or not). May not be set, e.g. if children of a node are requested, then
- * the node may not have been evaluated concerning its parent. 
+ * a tree. May be null if term is leaf OR if not evaluated, e.g. if path to top
+ * is requested, then lowest node may not have been evaluated concerning its children.
+ * <li><code>parent</code>: specifies whether the term has a parent.
+ * May be null if term is top term OR if not evaluated, e.g. if children
+ * of a node are requested, then the node may not have been evaluated concerning its parent.
  * </ul>
  */
 public interface TreeTerm extends Term {
 	
 	/**
-	 * Set whether the term has a parent.
-	 * @param hasParent true=term has a parent, false=term is top node
+	 * Add a term as child of this term !
+	 * @param child <code>Term</code> added as child of this term !
+	 * NOTICE: Not necessarily a <code>TreeTerm</code>, child/parent data in child not needed !</br>
 	 */
-	public void setHasParent(boolean hasParent);
+	public void addChild(Term child);
 
 	/**
-	 * Get info whether term has a parent.
-	 * @return true=term has a parent, false=term is top node, NULL=not evaluated yet
+	 * Get children of term.
+	 * NOTICE: May be null, if not evaluated yet OR if term is leaf !<br/>
+	 * @return null=not evaluated yet OR leaf, not null=list of children</br>
+	 * NOTICE: Returns <code>Terms</code> (NOT <code>TreeTerms</code>) !
+	 * child/parent data in children not necessarily needed !
 	 */
-	public Boolean getHasParent();
+	public List<Term> getChildren();
 
 	/**
-	 * Set whether term has subterms.
-	 * @param hasChildren true=term has subterms, false=term is leaf
+	 * Add a term as the parent of this term !
+	 * @param parent <code>Term</code> set as parent of this term !
+	 * NOTICE: Not necessarily a <code>TreeTerm</code>, child/parent data in parent not needed !</br>
 	 */
-	public void setHasChildren(boolean hasChildren);
+	public void setParent(Term parent);
 
 	/**
-	 * Get info whether term has subterms.<br/>
-	 * Determines whether a next hierarchy level can be requested when browsing a tree.
-	 * @return true=term has subterms, false=term is leaf, null=not evaluated yet
+	 * Get parent of term.
+	 * NOTICE: May be null, if not evaluated yet OR if top node !<br/>
+	 * @return null=not evaluated yet OR top node, not null=parent of term</br>
+	 * NOTICE: Returns <code>Term</code> (NOT <code>TreeTerm</code>) !
+	 * child/parent data in parent not necessarily needed !
 	 */
-	public Boolean getHasChildren();
+	public Term getParent();
 }
