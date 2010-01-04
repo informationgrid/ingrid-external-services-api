@@ -65,29 +65,37 @@ public interface Term {
 	public String getName();
 
 	/**
+	 * SNS SPECIFIC, ALWAYS NULL WHEN GEMET IS USED !</br>
 	 * Set the alternate id of the term if present.<br/>
-	 * Utilized in SNS where ONE term can have different ids dependent from used thesaurus ! 
+	 * Utilized in SNS where ONE term can have different ids dependent from used thesaurus (UMTHES, GEMET).
+	 * This one holds the GEMET id if term has GEMET representation.
 	 * @param alternateId the alternate id of the term (utilized in SNS). NULL per default. 
 	 */
 	public void setAlternateId(String alternateId);
 
 	/**
+	 * SNS SPECIFIC, ALWAYS NULL WHEN GEMET IS USED !</br>
 	 * Get the alternate id of the term if present.<br/>
-	 * Utilized in SNS where ONE term can have different ids dependent from used thesaurus ! 
+	 * Utilized in SNS where ONE term can have different ids dependent from used thesaurus (UMTHES, GEMET).
+	 * This one holds the GEMET id if term has GEMET representation.
 	 * @return the alternate id of the term if present (utilized in SNS). NULL per default. 
 	 */
 	public String getAlternateId();
 
 	/**
+	 * SNS SPECIFIC, ALWAYS NULL WHEN GEMET IS USED !</br>
 	 * Set the alternate name of the term if present.<br/>
-	 * Utilized in SNS where a term can have a different name dependent from used thesaurus ! 
+	 * Utilized in SNS where a term can have a different name dependent from used thesaurus (UMTHES, GEMET).
+	 * This one holds the UMTHES name if term has GEMET representation.
 	 * @param alternateName the alternate name of the term (utilized in SNS). NULL per default. 
 	 */
 	public void setAlternateName(String alternateName);
 
 	/**
+	 * SNS SPECIFIC, ALWAYS NULL WHEN GEMET IS USED !</br>
 	 * Get the alternate name of the term if present.<br/>
-	 * Utilized in SNS where a term can have a different name dependent from used thesaurus ! 
+	 * Utilized in SNS where a term can have a different name dependent from used thesaurus (UMTHES, GEMET).
+	 * This one holds the UMTHES name if term has GEMET representation.
 	 * @return the alternate name of the term if present (utilized in SNS). NULL per default. 
 	 */
 	public String getAlternateName();

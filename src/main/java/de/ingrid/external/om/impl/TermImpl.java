@@ -12,8 +12,10 @@ public class TermImpl implements Term {
 	private String id;
 	private String name;
 	private TermType type;
-	private String alternateId;
-	private String alternateName;
+	/**	SNS -> GEMET ID if present */
+	private String alternateId; 
+	/**	SNS -> UMTHES name if different from GEMET name */
+	private String alternateName; 
 	private List<String> inspireThemes;
 
 	@Override
