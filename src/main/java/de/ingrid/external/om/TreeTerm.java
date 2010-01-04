@@ -6,52 +6,58 @@ package de.ingrid.external.om;
 import java.util.List;
 
 /**
- * Representation of a thesaurus term IN A TREE.
- * Adds additional info about parent and children in hierarchy.<p>
- * Mandatory content (NOT NULL):
+ * Representation of a thesaurus term IN A TREE used for all HIERARCHY OPERATIONS !
+ * Adds additional info about parents and children to the term.
+ * NOTICE: a node can have multiple parents !<p>
+ * Mandatory content:
  * <ul><li>see <code>Term</code>
+ * <li><code>parents</code>: specifies whether the term has a parent.</br>
+ * A node can have multiple parents. If NULL then the term is a top node !
+ * NOTICE: In all hierarchy operations at least one parent is evaluated, so this
+ * is only null if the term is a top node, see <code>getParent</code>.
  * </ul>
  * Optionally delivered information, dependent from context:
- * <ul><li><code>children</code>: specifies whether the term has children.
+ * <ul><li><code>children</code>: specifies whether the term has children.</br>
  * Determines whether a next hierarchy level can be requested when browsing
- * a tree. May be null if term is leaf OR if not evaluated, e.g. if path to top
- * is requested, then lowest node may not have been evaluated concerning its children.
- * <li><code>parent</code>: specifies whether the term has a parent.
- * May be null if term is top term OR if not evaluated, e.g. if children
- * of a node are requested, then the node may not have been evaluated concerning its parent.
+ * a tree. May be null if term is leaf OR if not evaluated yet, see <code>getChildren</code>.
  * </ul>
  */
 public interface TreeTerm extends Term {
 	
 	/**
-	 * Add a term as child of this term !
-	 * @param child <code>Term</code> added as child of this term !
-	 * NOTICE: Not necessarily a <code>TreeTerm</code>, child/parent data in child not needed !</br>
+	 * Add a term as child of THIS term !
+	 * <b>NOTICE: THIS term should also be added as parent to the child !!!</b>
+	 * @param child <code>TreeTerm</code> added as child of this term !
 	 */
-	public void addChild(Term child);
+	public void addChild(TreeTerm child);
 
 	/**
 	 * Get children of term.
-	 * NOTICE: May be null, if not evaluated yet OR if term is leaf !<br/>
-	 * @return null=not evaluated yet OR leaf, not null=list of children</br>
-	 * NOTICE: Returns <code>Terms</code> (NOT <code>TreeTerms</code>) !
-	 * child/parent data in children not necessarily needed !
+	 * NOTICE: May be null, if not evaluated yet OR if term is leaf ! This depends
+	 * on context, e.g. if path to top was requested, then lowest node is not evaluated
+	 * concerning its children (null). But if next hierarchy was requested and a child does NOT have
+	 * children (null), then it's a leaf (next hierarchy fetches 2 hierarchy levels).<br/>
+	 * @return null=not evaluated yet OR leaf</br>
+	 * 		not null=list of children. NOTICE: The list of children may not be complete, only
+	 * the children determined from request are added !
 	 */
-	public List<Term> getChildren();
+	public List<TreeTerm> getChildren();
 
 	/**
-	 * Add a term as the parent of this term !
-	 * @param parent <code>Term</code> set as parent of this term !
-	 * NOTICE: Not necessarily a <code>TreeTerm</code>, child/parent data in parent not needed !</br>
+	 * Add a term as the parent of THIS term ! A term can have multiple parents. 
+	 * <b>NOTICE: THIS term should also be added as child to the parent !!!</b>
+	 * @param parent <code>TreeTerm</code> added as parent of this term !
 	 */
-	public void setParent(Term parent);
+	public void addParent(TreeTerm parent);
 
 	/**
-	 * Get parent of term.
-	 * NOTICE: May be null, if not evaluated yet OR if top node !<br/>
-	 * @return null=not evaluated yet OR top node, not null=parent of term</br>
-	 * NOTICE: Returns <code>Term</code> (NOT <code>TreeTerm</code>) !
-	 * child/parent data in parent not necessarily needed !
+	 * Get parents of term. A Term can have multiple parents.
+	 * NOTICE: Is null if term is top node ! If path to top was requested, then all nodes
+	 * in hierarchy contain their parents and null means top node ! If next hierarchy level
+	 * was requested (via ID of parent term), then all direct children contain term with ID as parent.<br/>
+	 * @return null=top node</br>
+	 * 		not null=list of parents. NOTICE: The list of parents may not be complete, only
+	 * the parents determined from request are added !
 	 */
-	public Term getParent();
+	public List<TreeTerm> getParents();
 }

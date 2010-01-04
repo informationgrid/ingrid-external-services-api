@@ -53,7 +53,7 @@ public interface ThesaurusService {
      * <br/>Enter text, click "Thesaurus look-up" and click on found term
      * </ul>
      * @param termId the unique identifier of the term to found related terms from
-     * @param language which language, pass null if default language
+     * @param language which language
      * @return Array of related terms for passed term (or empty array)
      */
     RelatedTerm[] getRelatedTermsFromTerm(String termId, Locale language);
@@ -63,38 +63,37 @@ public interface ThesaurusService {
      * <ul><li>PortalU: Used for getting detailed term data, e.g. when term is clicked in term browser in extended search.
      * </ul>
      * @param termId the unique identifier of the term in thesaurus
-     * @param language which language to fetch, pass null if default language.
+     * @param language which language to fetch
      * 	NOTICE: may be ignored by service if termId already determines language !
      * @return the found term or null if not found
      */
     Term getTerm(String termId, Locale language);
 
     /**
-     * Get all direct child terms of the given term (next level). Used for browsing tree structure.</br>
-     * <b>NOTICE: returned tree terms contain information about their parent and children, where possible,
-     * see <code>TreeTerm</code></b> 
+     * Get all direct child terms of the given term in an Array (next hierarchy level). Pass null to request top terms.
+     * Used for browsing tree structure. NOTICE: Returned terms in array contain Term with given id as parent
+     * (OR null if top terms). Further the terms in the array contain their children, so 2 hierarchy
+     * levels are fetched. <b>See <code>TreeTerm</code></b> 
      * <ul><li>PortalU: http://www.portalu.de/ingrid-portal/portal/search-catalog/search-catalog-thesaurus.psml
      * </ul>
      * @param termId the unique identifier of the term to fetch subterms from. PASS NULL IF TOP TERMS WANTED !
-     * @param language which language, pass null if default language
-     * @return Array containing next level of terms (or empty array if leaf).
-     * <b>NOTICE: tree terms in array should have information about their parent and children, where possible,
-     * see <code>TreeTerm</code></b> 
+     * @param language which language
+     * @return Array containing next level of terms (or empty array if leaf). The terms contain their parent and
+     * their children.
      */
     TreeTerm[] getHierarchyNextLevel(String termId, Locale language);
 
     /**
-     * Get the path of terms to the top starting at term with given id.
-     * <b>NOTICE: returned tree terms contain information about their parent and children, where possible,
-     * see <code>TreeTerm</code></b> 
-     * <ul><li>PortalU: used in IGE (InGridEditor) to show term in tree (open all parent nodes)
+     * Get the paths to the top in hierarchy starting at term with given id. NOTICE: A
+     * term can have multiple parents, so ALL paths to the top should be determined.
+     * Used for searching term in a tree. The TreeTerm with the passed id is returned
+     * containing all of its parent(s). <b>See <code>TreeTerm</code></b>
+     * <ul><li>PortalU: used in IGE (InGridEditor) to search term in tree
      * </ul>
      * @param termId the unique identifier of the term to determine parents from.
-     * @param language which language, pass null if default language
-     * @return Array containing parent terms of passed term, starting with passed term.
-     *  index0=term of passed id, index1=parent, index2=parent of parent, ... top node
-     * <b>NOTICE: tree terms in array should have information about their parent and children, where possible,
-     * see <code>TreeTerm</code></b> 
+     * @param language which language
+     * @return The starting term with the given id containing all of its parent(s). These parent(s)
+     * contain their parent(s) as well till top.
      */
-    TreeTerm[] getHierarchyPathToTop(String termId, Locale language);
+    TreeTerm getHierarchyPathToTop(String termId, Locale language);
 }

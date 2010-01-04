@@ -3,7 +3,6 @@ package de.ingrid.external.om.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.ingrid.external.om.Term;
 import de.ingrid.external.om.TreeTerm;
 
 /**
@@ -11,35 +10,38 @@ import de.ingrid.external.om.TreeTerm;
  */
 public class TreeTermImpl extends TermImpl implements TreeTerm {
 
-	private Term parent;
-	private List<Term> children;
+	private List<TreeTerm> parents;
+	private List<TreeTerm> children;
 
 	@Override
-	public List<Term> getChildren() {
+	public List<TreeTerm> getChildren() {
 		return children;
 	}
 
 	@Override
-	public void addChild(Term child) {
+	public void addChild(TreeTerm child) {
 		if (children == null) {
-			children = new ArrayList<Term>();
+			children = new ArrayList<TreeTerm>();
 		}
 		children.add(child);
 	}
 
 	@Override
-	public Term getParent() {
-		return parent;
+	public List<TreeTerm> getParents() {
+		return parents;
 	}
 
 	@Override
-	public void setParent(Term parent) {
-		this.parent = parent;
+	public void addParent(TreeTerm parent) {
+		if (parents == null) {
+			parents = new ArrayList<TreeTerm>();
+		}
+		parents.add(parent);
 	}
 
 	public String toString() {
 		String result = super.toString() + " ";
-		result += "parent: "+ ((this.parent != null) ? parent.getId() : null);
+		result += "parents: "+ ((this.parents != null) ? parents.size() : null);
 		result += ", children: "+ ((this.children != null) ? children.size() : null);
 
 		return result;
