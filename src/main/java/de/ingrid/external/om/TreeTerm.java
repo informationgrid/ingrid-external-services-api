@@ -35,8 +35,9 @@ public interface TreeTerm extends Term {
 	 * Get children of term.
 	 * NOTICE: May be null, if not evaluated yet OR if term is leaf ! This depends
 	 * on context, e.g. if path to top was requested, then lowest node is not evaluated
-	 * concerning its children (null). But if next hierarchy was requested and a child does NOT have
-	 * children (null), then it's a leaf (next hierarchy fetches 2 hierarchy levels).<br/>
+	 * concerning its children (null). But if next hierarchy downwards was requested
+	 * and a child does NOT have children (null), then it's a leaf (next hierarchy fetches 2
+	 * hierarchy levels).<br/>
 	 * @return null=not evaluated yet OR leaf</br>
 	 * 		not null=list of children. NOTICE: The list of children may not be complete, only
 	 * the children determined from request are added !
@@ -53,8 +54,9 @@ public interface TreeTerm extends Term {
 	/**
 	 * Get parents of term. A Term can have multiple parents.
 	 * NOTICE: Is null if term is top node ! If path to top was requested, then all nodes
-	 * in hierarchy contain their parents and null means top node ! If next hierarchy level
-	 * was requested (via ID of parent term), then all direct children contain term with ID as parent.<br/>
+	 * in hierarchy contain their parents and null means top node ! If next hierarchy
+	 * downwards was requested (via ID of parent term), then all direct children contain
+	 * their parent term (the one with the passed ID).<br/>
 	 * @return null=top node</br>
 	 * 		not null=list of parents. NOTICE: The list of parents may not be complete, only
 	 * the parents determined from request are added !

@@ -65,7 +65,7 @@ public interface Term {
 	public String getName();
 
 	/**
-	 * SNS SPECIFIC, ALWAYS NULL WHEN GEMET IS USED !</br>
+	 * SNS SPECIFIC, ALWAYS NULL IF NOT USING SNS (GSSoil) !</br>
 	 * Set the alternate id of the term if present.<br/>
 	 * Utilized in SNS where ONE term can have different ids dependent from used thesaurus (UMTHES, GEMET).
 	 * This one holds the GEMET id if term has GEMET representation.
@@ -74,7 +74,7 @@ public interface Term {
 	public void setAlternateId(String alternateId);
 
 	/**
-	 * SNS SPECIFIC, ALWAYS NULL WHEN GEMET IS USED !</br>
+	 * SNS SPECIFIC, ALWAYS NULL IF NOT USING SNS (GSSoil) !</br>
 	 * Get the alternate id of the term if present.<br/>
 	 * Utilized in SNS where ONE term can have different ids dependent from used thesaurus (UMTHES, GEMET).
 	 * This one holds the GEMET id if term has GEMET representation.
@@ -83,7 +83,7 @@ public interface Term {
 	public String getAlternateId();
 
 	/**
-	 * SNS SPECIFIC, ALWAYS NULL WHEN GEMET IS USED !</br>
+	 * SNS SPECIFIC, ALWAYS NULL IF NOT USING SNS (GSSoil) !</br>
 	 * Set the alternate name of the term if present.<br/>
 	 * Utilized in SNS where a term can have a different name dependent from used thesaurus (UMTHES, GEMET).
 	 * This one holds the UMTHES name if term has GEMET representation.
@@ -92,7 +92,7 @@ public interface Term {
 	public void setAlternateName(String alternateName);
 
 	/**
-	 * SNS SPECIFIC, ALWAYS NULL WHEN GEMET IS USED !</br>
+	 * SNS SPECIFIC, ALWAYS NULL IF NOT USING SNS (GSSoil) !</br>
 	 * Get the alternate name of the term if present.<br/>
 	 * Utilized in SNS where a term can have a different name dependent from used thesaurus (UMTHES, GEMET).
 	 * This one holds the UMTHES name if term has GEMET representation.

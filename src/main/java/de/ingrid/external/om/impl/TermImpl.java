@@ -18,6 +18,14 @@ public class TermImpl implements Term {
 	private String alternateName; 
 	private List<String> inspireThemes;
 
+	public TermImpl() {}
+
+	public TermImpl(String id, String name, TermType type) {
+		this.id = id;
+		this.name = name;
+		this.type = type;
+	}
+
 	@Override
 	public String getAlternateId() {
 		return alternateId;
