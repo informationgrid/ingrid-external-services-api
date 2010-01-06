@@ -19,16 +19,23 @@ import de.ingrid.external.om.TreeTerm;
 public interface ThesaurusService {
 
     /**
-     * Get similar thesaurus terms for a given arbitrary word/name.<br/>
+     * Get similar thesaurus terms for the given arbitrary names (words). This is used if
+     * a more "professional" name is searched for a given name. Normally it is used for a
+     * single name, but SNS also supports fetching of similar terms for multiple names
+     * in one call, so we support this here !</br>
+     * NOTICE: The returned terms are <b>ordered alphabetically</b>!
+     * There's no connection to the name a term refers to when passing multiple names.<br/>
      * <ul><li>PortalU: http://www.portalu.de/ingrid-portal/portal/main-search.psml?action=doSearch&q=water
      * <br/>Klick "Similar Terms: Search for ..."
      * </ul>
-     * @param name arbitrary word to search thesaurus terms for.
-     * @param language language of the name and the results. If passed language can't be processed
-     * 		or is null then default language may be used (PortalU: de, GS Soil: en)
-     * @return Array of related thesaurus terms (or empty array)
+     * @param names arbitrary names (words) to search similar thesaurus terms for.
+     * @param language should the search be case sensitive (false) or ignore case (true)
+     * @param language language of the names and the results.
+     * @return Array of similar thesaurus terms (or empty array).
+     * NOTICE: The terms are <b>ordered alphabetically, no duplicates</b>!
+     * The Terms can be of arbitrary type (DESCRIPTOR, NON_DESCRIPTOR) 
      */
-	Term[] getTermsFromName(String name, Locale language);
+	Term[] getSimilarTermsFromNames(String[] names, boolean ignoreCase, Locale language);
 
     /**
      * Classify a text meaning get thesaurus <b>DESCRIPTOR</b> terms describing the text.
