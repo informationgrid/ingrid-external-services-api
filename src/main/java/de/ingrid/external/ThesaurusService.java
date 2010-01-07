@@ -19,12 +19,13 @@ import de.ingrid.external.om.TreeTerm;
 public interface ThesaurusService {
 
     /**
-     * Get similar thesaurus terms for the given arbitrary names (words). This is used if
-     * a more "professional" name is searched for a given name. Normally it is used for a
-     * single name, but SNS also supports fetching of similar terms for multiple names
-     * in one call, so we support this here !</br>
+     * Get similar thesaurus terms for arbitrary names (words). This is used for
+     * a better word choice for searching. Normally it is used for a single name,
+     * but SNS also supports fetching of similar terms for multiple names in one call,
+     * so we support this here !</br>
      * NOTICE: The returned terms are <b>ordered alphabetically</b>!
-     * There's no connection to the name a term refers to when passing multiple names.<br/>
+     * If multiple names are passed the reference between the returned terms and
+     * the input names is lost.
      * <ul><li>PortalU: http://www.portalu.de/ingrid-portal/portal/main-search.psml?action=doSearch&q=water
      * <br/>Klick "Similar Terms: Search for ..."
      * </ul>
@@ -33,23 +34,23 @@ public interface ThesaurusService {
      * @param language language of the names and the results.
      * @return Array of similar thesaurus terms (or empty array).
      * NOTICE: The terms are <b>ordered alphabetically, no duplicates</b>!
-     * The Terms can be of arbitrary type (DESCRIPTOR, NON_DESCRIPTOR) 
+     * The Terms can be of arbitrary type (DESCRIPTOR, NON_DESCRIPTOR).
      */
 	Term[] getSimilarTermsFromNames(String[] names, boolean ignoreCase, Locale language);
 
     /**
-     * Classify a text meaning get thesaurus <b>DESCRIPTOR</b> terms describing the text.
+     * Classify a text meaning identify thesaurus <b>DESCRIPTOR</b> terms describing the text.
      * When using SNS the autoclassify method of SNS is used.<br/>
      * <ul><li>used in Portal Extended Search for look up of thesaurus terms from arbitrary
      * entered text see<br/>
      * PortalU: http://www.portalu.de/ingrid-portal/portal/search-extended/search-ext-env-topic-thesaurus.psml
      * <br/>Enter text and click "Thesaurus look-up"
      * </ul>
-     * @param text arbitrary text to classify. Multiple words, sentences etc.
-     * @param analyzeMaxWords The maximal number of words to analyze
+     * @param text any kind of text to classify
+     * @param analyzeMaxWords The maximal number of words to analyze.
+     * 		if the document contains more words these will be ignored
      * @param ignoreCase Set to true to ignore capitalization of the text
-     * @param language language of the text and the results. If passed language can't be processed
-     * 		or is null then default language may be used (PortalU: de, GS Soil: en)
+     * @param language language of the text and the results.
      * @return Array of thesaurus <b>DESCRIPTOR</b> terms found for text (or empty array)
      */
     Term[] getTermsFromText(String text, int analyzeMaxWords, boolean ignoreCase, Locale language);
