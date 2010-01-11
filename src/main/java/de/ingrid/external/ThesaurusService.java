@@ -33,18 +33,20 @@ public interface ThesaurusService {
      * Search for thesaurus terms by an arbitrary query term (single word or words belonging together).
      * This allows search with additional search criteria like matching type. 
      * <ul>
-     * <li>PortalU: http://www.portalu.de/ingrid-portal/portal/main-search.psml?action=doSearch&q=water
-     * <br/>Klick "Similar Terms: Search for ..."
+     * <li>PortalU: used in IGE (InGridEditor) to search term
      * <li>when using SNS here's the method used: http://www.semantic-network.de/doc_findtopics.html?lang=en
      * </br> we always search "also in the flexion of names"
      * </ul>
      * @param queryTerm an arbitrary term (single word or words belonging together). Term does NOT mean "thesaurus term" here.
      * @param matching occurence of the query term during search. Supports exact match, beginning of word, and contained.
+     * @param addDescriptors This option becomes only effective in case of non-descriptors in the result.
+     * 		In this case their associated descriptors are added to the result list.
      * @param language language of queryTerm and the results.
      * @return Array of thesaurus terms found for queryTerm (or empty array).
      * NOTICE: The Terms can be of arbitrary type (DESCRIPTOR, NON_DESCRIPTOR).
      */
-	Term[] findTermsFromQueryTerm(String queryTerm, MatchingType matching, Locale language);
+	Term[] findTermsFromQueryTerm(String queryTerm, MatchingType matching, boolean addDescriptors,
+			Locale language);
 
     /**
      * Get similar thesaurus terms for arbitrary names (words). This is used for
