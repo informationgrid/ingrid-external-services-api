@@ -20,7 +20,7 @@ public interface Term {
 		/** the term is a fully qualified term and can be used as a describing
 		 * term in meta data. The standard ! */
 		DESCRIPTOR,
-		/** the term is just a synonym for another term and should not be used
+		/** the term is just a synonym for another DESCRIPTOR term and should not be used
 		 * as a describing term in meta data (utilized in SNS) */
 		NON_DESCRIPTOR,
 		/** the term is just a label in the hierarchy and should not be used
@@ -86,7 +86,7 @@ public interface Term {
 	 * SNS SPECIFIC, ALWAYS NULL IF NOT USING SNS (GSSoil) !</br>
 	 * Set the alternate name of the term if present.<br/>
 	 * Utilized in SNS where a term can have a different name dependent from used thesaurus (UMTHES, GEMET).
-	 * This one holds the UMTHES name if term has GEMET representation.
+	 * This one holds the UMTHES name if term has a GEMET name.
 	 * @param alternateName the alternate name of the term (utilized in SNS). NULL per default. 
 	 */
 	public void setAlternateName(String alternateName);
@@ -95,20 +95,25 @@ public interface Term {
 	 * SNS SPECIFIC, ALWAYS NULL IF NOT USING SNS (GSSoil) !</br>
 	 * Get the alternate name of the term if present.<br/>
 	 * Utilized in SNS where a term can have a different name dependent from used thesaurus (UMTHES, GEMET).
-	 * This one holds the UMTHES name if term has GEMET representation.
+	 * This one holds the UMTHES name if term has a GEMET name.
 	 * @return the alternate name of the term if present (utilized in SNS). NULL per default. 
 	 */
 	public String getAlternateName();
 
 	/**
-	 * Set a list of Inspire Themes the term is related to (utilized in SNS).
-	 * @param inspireThemes list of inspire themes
+	 * Set a list of Inspire Themes the term is related to.</br>
+	 * Used in IGE (Editor) to automatically add related inspire themes.
+	 * @param inspireThemes list of inspire themes, e.g. "Addresses", "Administrative units",
+	 * "Agricultural and aquaculture facilities" ... "Utility and governmental services".
 	 */
 	public void setInspireThemes(List<String> inspireThemes);
 
 	/**
-	 * Get a list of Inspire Themes the term is related to (utilized in SNS).
-	 * @return list of inspire themes. NULL per default
+	 * Get a list of Inspire Themes the term is related to.</br>
+	 * Used in IGE (Editor) to automatically add related inspire themes.
+	 * @return list of inspire themes, e.g. "Addresses", "Administrative units",
+	 * "Agricultural and aquaculture facilities" ... "Utility and governmental services".
+	 * <b>NULL</b> per default
 	 */
 	public List<String> getInspireThemes();
 }

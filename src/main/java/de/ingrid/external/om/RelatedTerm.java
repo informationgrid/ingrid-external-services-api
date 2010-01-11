@@ -4,8 +4,8 @@
 package de.ingrid.external.om;
 
 /**
- * Representation of a gazetteer term RELATED TO ANOTHER ONE.
- * Adds additional relation information to the term.<p>
+ * Representation of a thesaurus term related to another thesaurus term.
+ * Adds additional information about the relation.<p>
  * Mandatory content (NOT NULL):
  * <ul><li>see <code>Term</code>
  * <li><code>relationType</code>: the type of the relation.
@@ -13,25 +13,25 @@ package de.ingrid.external.om;
  */
 public interface RelatedTerm extends Term {
 	
-	/** Type of the relation of this term */
+	/** Type of the relation of <code>this</code> term to another term. */
 	public enum RelationType {
 		/** term is a parent */
 		PARENT,
 		/** term is a child */
 		CHILD,
-		/** term is somehow connected (e.g. sibling or something else) */
+		/** term is somehow connected (e.g. is a synonym when utilizing SNS) */
 		RELATIVE;
 	}
 
 	/**
-	 * Set the type of the relation of this term.
-	 * @param type type of relation of this term, NOT NULL
+	 * Set the type of the relation of <code>this</code> term to another term.
+	 * @param type type of relation of <code>this</code> term, NOT NULL
 	 */
 	public void setRelationType(RelationType type);
 
 	/**
-	 * Get the type of the relation of this term.
-	 * @return type of relation of this term, NOT NULL
+	 * Get the type of the relation of <code>this</code> term to another term.
+	 * @return type of relation of <code>this</code> term, NOT NULL
 	 */
 	public RelationType getRelationType();
 }

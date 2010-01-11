@@ -19,7 +19,7 @@ import de.ingrid.external.om.TreeTerm;
 public interface ThesaurusService {
 
 	/** When searching for term in thesaurus with a given input name.
-	 * How should the Term match the input ? */
+	 * How should the Term match the input ? Only needed when requesting special search (findTerms...)*/
 	public enum MatchingType {
 		/** the term contains the input */
 		CONTAINS,
@@ -30,14 +30,14 @@ public interface ThesaurusService {
 	}
 
     /**
-     * Search for thesaurus terms by an arbitrary query term (single word or words belonging together).
+     * Search for thesaurus terms by an arbitrary query term (single word or multiple words belonging together).
      * This allows search with additional search criteria like matching type. 
      * <ul>
      * <li>PortalU: used in IGE (InGridEditor) to search term
-     * <li>when using SNS here's the method used: http://www.semantic-network.de/doc_findtopics.html?lang=en
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_findtopics.html?lang=en
      * </br> we always search "also in the flexion of names"
      * </ul>
-     * @param queryTerm an arbitrary term (single word or words belonging together). Term does NOT mean "thesaurus term" here.
+     * @param queryTerm an arbitrary term (single word or multiple words belonging together). Term does NOT mean "thesaurus term" here.
      * @param matching occurence of the query term during search. Supports exact match, beginning of word, and contained.
      * @param addDescriptors This option becomes only effective in case of non-descriptors in the result.
      * 		In this case their associated descriptors are added to the result list.
@@ -58,7 +58,7 @@ public interface ThesaurusService {
      * <ul>
      * <li>PortalU: http://www.portalu.de/ingrid-portal/portal/main-search.psml?action=doSearch&q=water
      * <br/>Klick "Similar Terms: Search for ..."
-     * <li>when using SNS here's the method used: http://www.semantic-network.de/doc_getsimilarterms.html?lang=en
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_getsimilarterms.html?lang=en
      * </ul>
      * @param names arbitrary names (words) to search similar thesaurus terms for.
      * @param language should the search be case sensitive (false) or ignore case (true)
@@ -72,14 +72,17 @@ public interface ThesaurusService {
     /**
      * Classify a text meaning identify thesaurus <b>DESCRIPTOR</b> terms describing the text.
      * When using SNS the autoclassify method of SNS is used.<br/>
-     * <ul><li>used in Portal Extended Search for look up of thesaurus terms from arbitrary
+     * <ul>
+     * <li>used in Portal Extended Search for look up of thesaurus terms from arbitrary
      * entered text see<br/>
      * PortalU: http://www.portalu.de/ingrid-portal/portal/search-extended/search-ext-env-topic-thesaurus.psml
      * <br/>Enter text and click "Thesaurus look-up"
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_autoclassifytext.html?lang=en
+     * </br>NOTICE: not all parameters are part of UI.
      * </ul>
      * @param text any kind of text to classify
      * @param analyzeMaxWords The maximal number of words to analyze.
-     * 		if the document contains more words these will be ignored
+     * 		If the document contains more words these will be ignored
      * @param ignoreCase Set to true to ignore capitalization of the text
      * @param language language of the text and the results.
      * @return Array of thesaurus <b>DESCRIPTOR</b> terms found for text (or empty array)
@@ -87,23 +90,28 @@ public interface ThesaurusService {
     Term[] getTermsFromText(String text, int analyzeMaxWords, boolean ignoreCase, Locale language);
 
     /**
-     * Get all related terms for a given term.<br/>
-     * <ul><li>PortalU: http://www.portalu.de/ingrid-portal/portal/search-extended/search-ext-env-topic-thesaurus.psml
+     * Get all related terms for a given term.
+     * <ul>
+     * <li>PortalU: http://www.portalu.de/ingrid-portal/portal/search-extended/search-ext-env-topic-thesaurus.psml
      * <br/>Enter text, click "Thesaurus look-up" and click on found term
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_getpsi.html?lang=en
+     * </br>NOTICE: we always target topics of type "/thesa" (=Thesaurus Entry)
      * </ul>
      * @param termId the unique identifier of the term to found related terms from
-     * @param language which language
+     * @param language which language. NOTICE: may be ignored by service if termId already determines language !
      * @return Array of related terms for passed term (or empty array)
      */
     RelatedTerm[] getRelatedTermsFromTerm(String termId, Locale language);
 
     /**
-     * Get term with given id.<br/>
-     * <ul><li>PortalU: Used for getting detailed term data, e.g. when term is clicked in term browser in extended search.
+     * Get term with given id.
+     * <ul>
+     * <li>PortalU: Used for getting detailed term data, e.g. when term is clicked in term browser in extended search.
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_getpsi.html?lang=en
+     * </br>NOTICE: we always target topics of type "/thesa" (=Thesaurus Entry)
      * </ul>
      * @param termId the unique identifier of the term in thesaurus
-     * @param language which language to fetch
-     * 	NOTICE: may be ignored by service if termId already determines language !
+     * @param language which language to fetch. NOTICE: may be ignored by service if termId already determines language !
      * @return the found term or null if not found
      */
     Term getTerm(String termId, Locale language);
@@ -113,12 +121,16 @@ public interface ThesaurusService {
      * Used for browsing tree structure. NOTICE: Returned terms in array contain Term with given id as parent
      * (OR null if top terms). Further the terms in the array contain their children, so 2 hierarchy
      * levels are fetched. <b>See <code>TreeTerm</code></b> 
-     * <ul><li>PortalU: http://www.portalu.de/ingrid-portal/portal/search-catalog/search-catalog-thesaurus.psml
+     * <ul>
+     * <li>PortalU: http://www.portalu.de/ingrid-portal/portal/search-catalog/search-catalog-thesaurus.psml
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_gethierarchy.html?lang=en
+     * </br>NOTICE: we always go "downwards" with a "depth of 2" and "ignore siblings". If top terms requested we
+     * use "depth 1".
      * </ul>
      * @param termId the unique identifier of the term to fetch subterms from. PASS NULL IF TOP TERMS WANTED !
      * @param language which language
      * @return Array containing next level of terms (or empty array if leaf). The terms contain their parent and
-     * their children.
+     * their children. <b>See <code>TreeTerm</code></b>
      */
     TreeTerm[] getHierarchyNextLevel(String termId, Locale language);
 
@@ -127,12 +139,15 @@ public interface ThesaurusService {
      * term can have multiple parents, so ALL paths to the top should be determined.
      * Used for searching term in a tree. The TreeTerm with the passed id is returned
      * containing all of its parent(s). <b>See <code>TreeTerm</code></b>
-     * <ul><li>PortalU: used in IGE (InGridEditor) to search term in tree
+     * <ul>
+     * <li>PortalU: used in IGE (InGridEditor) to search term in tree
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_gethierarchy.html?lang=en
+     * </br>NOTICE: we always go "upwards" with a "depth of 0" (meaning to top) and "ignore siblings".
      * </ul>
      * @param termId the unique identifier of the term to determine parents from.
      * @param language which language
      * @return The starting term with the given id containing all of its parent(s). These parent(s)
-     * contain their parent(s) as well till top.
+     * contain their parent(s) as well till top. <b>See <code>TreeTerm</code></b>
      */
     TreeTerm getHierarchyPathToTop(String termId, Locale language);
 }
