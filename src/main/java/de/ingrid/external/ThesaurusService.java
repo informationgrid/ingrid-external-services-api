@@ -18,16 +18,45 @@ import de.ingrid.external.om.TreeTerm;
  */
 public interface ThesaurusService {
 
+	/** When searching for term in thesaurus with a given input name.
+	 * How should the Term match the input ? */
+	public enum MatchingType {
+		/** the term contains the input */
+		CONTAINS,
+		/** the term begins with the input */
+		BEGINS_WITH,
+		/** the term exactly matches the input */
+		EXACT;
+	}
+
+    /**
+     * Search for thesaurus terms by an arbitrary query term (single word or words belonging together).
+     * This allows search with additional search criteria like matching type. 
+     * <ul>
+     * <li>PortalU: http://www.portalu.de/ingrid-portal/portal/main-search.psml?action=doSearch&q=water
+     * <br/>Klick "Similar Terms: Search for ..."
+     * <li>when using SNS here's the method used: http://www.semantic-network.de/doc_findtopics.html?lang=en
+     * </br> we always search "also in the flexion of names"
+     * </ul>
+     * @param queryTerm an arbitrary term (single word or words belonging together). Term does NOT mean "thesaurus term" here.
+     * @param matching occurence of the query term during search. Supports exact match, beginning of word, and contained.
+     * @param language language of queryTerm and the results.
+     * @return Array of thesaurus terms found for queryTerm (or empty array).
+     * NOTICE: The Terms can be of arbitrary type (DESCRIPTOR, NON_DESCRIPTOR).
+     */
+	Term[] findTermsFromQueryTerm(String queryTerm, MatchingType matching, Locale language);
+
     /**
      * Get similar thesaurus terms for arbitrary names (words). This is used for
      * a better word choice for searching. Normally it is used for a single name,
      * but SNS also supports fetching of similar terms for multiple names in one call,
      * so we support this here !</br>
      * NOTICE: The returned terms are <b>ordered alphabetically</b>!
-     * If multiple names are passed the reference between the returned terms and
-     * the input names is lost.
-     * <ul><li>PortalU: http://www.portalu.de/ingrid-portal/portal/main-search.psml?action=doSearch&q=water
+     * If multiple names are passed the reference between returned term and input name is lost.
+     * <ul>
+     * <li>PortalU: http://www.portalu.de/ingrid-portal/portal/main-search.psml?action=doSearch&q=water
      * <br/>Klick "Similar Terms: Search for ..."
+     * <li>when using SNS here's the method used: http://www.semantic-network.de/doc_getsimilarterms.html?lang=en
      * </ul>
      * @param names arbitrary names (words) to search similar thesaurus terms for.
      * @param language should the search be case sensitive (false) or ignore case (true)

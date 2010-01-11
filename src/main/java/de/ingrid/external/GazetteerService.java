@@ -54,15 +54,19 @@ public interface GazetteerService {
     Location[] getLocationsFromText(String text, int analyzeMaxWords, boolean ignoreCase, Locale language);
 
     /**
-     * Analyze arbitrary entered terms delivering gazetteer locations.<br/>
+     * Search for location by an arbitrary query term (single word or words belonging together).
+     * This allows search with additional search criteria like typeOfQuery. 
      * This one is separated from <code>getLocationsFromText</code> because a different method
      * is called when using SNS (findTopics). There specific <b>types</b> of locations can be queried !<br/>
-     * <ul><li>used in IGE when location of catalog is chosen. There only administrative locations are queried !
+     * <ul>
+     * <li>used in IGE when location of catalog is chosen. There only administrative locations are queried !
+     * <li>when using SNS here's the method used: http://www.semantic-network.de/doc_findtopics.html?lang=en
+     * </br> we always search "also in the flexion of names"
      * </ul>
-     * @param queryTerms arbitrary entered word(s)
+     * @param queryTerm an arbitrary term (single word or words belonging together). 
      * @param typeOfQuery which type of locations to query from gazetteer (utilized in SNS)
-     * @param language language of queryTerms
-     * @return Array of Locations found for text (or empty array).
+     * @param language language of queryTerm
+     * @return Array of Locations found for queryTerm (or empty array).
      */
-    Location[] getLocationsFromQueryTerms(String queryTerms, QueryType typeOfQuery, Locale language);
+    Location[] findLocationsFromQueryTerm(String queryTerm, QueryType typeOfQuery, Locale language);
 }
