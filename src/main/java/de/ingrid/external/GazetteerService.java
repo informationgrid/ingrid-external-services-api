@@ -23,19 +23,35 @@ public interface GazetteerService {
 		ONLY_ADMINISTRATIVE_LOCATIONS;
 	}
 
+	/** When searching for location in gazetteer with a given input name.
+	 * How should the location match the input ? Only needed when requesting special search (findLocations...)*/
+	public enum MatchingType {
+		/** the location contains the input */
+		CONTAINS,
+		/** the location begins with the input */
+		BEGINS_WITH,
+		/** the location exactly matches the input */
+		EXACT;
+	}
+
     /**
-     * Get all related gazetteer-locations of a given gazetteer-location.<br/>
-     * <ul><li>used in Portal Extended Search for showing associated locations of a
-     * given location, e.g. showing capital city of a country.<br/>
-     * PortalU: http://www.portalu.de/ingrid-portal/portal/search-extended/search-ext-env-place-geothesaurus.psml
-     * <br/>Enter text, click "Look-up Geographic Names" and click on found location
+     * Search for location by an arbitrary query term (single word or words belonging together).
+     * This allows search with additional search criteria like typeOfQuery and matching type. 
+     * This one is separated from <code>getLocationsFromText</code> because a different method
+     * is called when using SNS (findTopics). There specific <b>types</b> of locations can be queried !<br/>
+     * <ul>
+     * <li>used in IGE when location of catalog is chosen. There only administrative locations are queried !
+     * <li>when using SNS here's the method used: http://www.semantic-network.de/doc_findtopics.html?lang=en
+     * </br> we always search "also in the flexion of names"
      * </ul>
-     * @param locationId the unique identifier of a location in the gazetteer
-     * @param language request results in this language. If passed language can't be processed
-     * 		or is null then default language may be used (PortalU: de, GS Soil: en) 
-     * @return Array of related locations found for passed location (or empty array)
+     * @param queryTerm an arbitrary term (single word or words belonging together). 
+     * @param typeOfQuery which type of locations to query from gazetteer (utilized in SNS)
+     * @param matching occurence of the query term during search. Supports exact match, beginning of word, and contained.
+     * @param language language of queryTerm
+     * @return Array of Locations found for queryTerm (or empty array).
      */
-    Location[] getRelatedLocationsFromLocation(String locationId, Locale language);
+    Location[] findLocationsFromQueryTerm(String queryTerm, QueryType typeOfQuery,
+    		MatchingType matching, Locale language);
 
     /**
      * Analyze arbitrary TEXT delivering gazetteer locations.
@@ -54,19 +70,16 @@ public interface GazetteerService {
     Location[] getLocationsFromText(String text, int analyzeMaxWords, boolean ignoreCase, Locale language);
 
     /**
-     * Search for location by an arbitrary query term (single word or words belonging together).
-     * This allows search with additional search criteria like typeOfQuery. 
-     * This one is separated from <code>getLocationsFromText</code> because a different method
-     * is called when using SNS (findTopics). There specific <b>types</b> of locations can be queried !<br/>
-     * <ul>
-     * <li>used in IGE when location of catalog is chosen. There only administrative locations are queried !
-     * <li>when using SNS here's the method used: http://www.semantic-network.de/doc_findtopics.html?lang=en
-     * </br> we always search "also in the flexion of names"
+     * Get all related gazetteer-locations of a given gazetteer-location.<br/>
+     * <ul><li>used in Portal Extended Search for showing associated locations of a
+     * given location, e.g. showing capital city of a country.<br/>
+     * PortalU: http://www.portalu.de/ingrid-portal/portal/search-extended/search-ext-env-place-geothesaurus.psml
+     * <br/>Enter text, click "Look-up Geographic Names" and click on found location
      * </ul>
-     * @param queryTerm an arbitrary term (single word or words belonging together). 
-     * @param typeOfQuery which type of locations to query from gazetteer (utilized in SNS)
-     * @param language language of queryTerm
-     * @return Array of Locations found for queryTerm (or empty array).
+     * @param locationId the unique identifier of a location in the gazetteer
+     * @param language request results in this language. If passed language can't be processed
+     * 		or is null then default language may be used (PortalU: de, GS Soil: en) 
+     * @return Array of related locations found for passed location (or empty array)
      */
-    Location[] findLocationsFromQueryTerm(String queryTerm, QueryType typeOfQuery, Locale language);
+    Location[] getRelatedLocationsFromLocation(String locationId, Locale language);
 }
