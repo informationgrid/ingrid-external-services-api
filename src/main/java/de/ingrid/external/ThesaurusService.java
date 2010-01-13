@@ -97,7 +97,7 @@ public interface ThesaurusService {
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_getpsi.html?lang=en
      * </br>NOTICE: we always target topics of type "/thesa" (=Thesaurus Entry)
      * </ul>
-     * @param termId the unique identifier of the term to found related terms from
+     * @param termId the unique identifier of a term to find related terms for
      * @param language which language. NOTICE: may be ignored by service if termId already determines language !
      * @return Array of related terms for passed term (or empty array)
      */

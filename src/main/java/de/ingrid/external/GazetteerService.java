@@ -76,17 +76,33 @@ public interface GazetteerService {
     Location[] getLocationsFromText(String text, int analyzeMaxWords, boolean ignoreCase, Locale language);
 
     /**
-     * Get all related gazetteer-locations of a given gazetteer-location.<br/>
-     * <ul><li>used in Portal Extended Search for showing associated locations of a
+     * Get all related gazetteer locations of a given gazetteer location.
+     * <ul>
+     * <li>used in Portal Extended Search for showing associated locations of a
      * given location, e.g. showing capital city of a country.<br/>
      * PortalU: http://www.portalu.de/ingrid-portal/portal/search-extended/search-ext-env-place-geothesaurus.psml
      * <br/>Enter text, click "Look-up Geographic Names" and click on found location
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_getpsi.html?lang=en
+     * </br>NOTICE: we always target topics of type "/location" (=Location Entry)
      * </ul>
-     * @param locationId the unique identifier of a location in the gazetteer
-     * @param language request results in this language. If passed language can't be processed
-     * 		or is null then default language may be used (PortalU: de, GS Soil: en) 
-     * @return Array of related locations found for passed location (or empty array)
+     * @param locationId the unique identifier of a location to find related locations for
+     * @param language which language. NOTICE: may be ignored by service if locationId already determines language !
+     * @return Array of related locations for passed location (or empty array)
      * 		NOTICE: SNS knows "expired" locations. These ones are not returned !
      */
     Location[] getRelatedLocationsFromLocation(String locationId, Locale language);
+
+    /**
+     * Get location with given id.
+     * <ul>
+     * <li>used in IGE to read location from id.
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_getpsi.html?lang=en
+     * </br>NOTICE: we always target topics of type "/location" (=Location Entry)
+     * </ul>
+     * @param locationId the unique identifier of the location in gazetteer
+     * @param language which language to fetch. NOTICE: may be ignored by service if locationId already determines language !
+     * @return the found location or null if not found.
+     * 		NOTICE: SNS knows "expired" locations. We always return the location found NO MATTER whether expired or not !
+     */
+    Location getLocation(String locationId, Locale language);
 }
