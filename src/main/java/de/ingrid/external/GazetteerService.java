@@ -85,12 +85,17 @@ public interface GazetteerService {
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_getpsi.html?lang=en
      * </br>NOTICE: we always target topics of type "/location" (=Location Entry)
      * </ul>
-     * @param locationId the unique identifier of a location to find related locations for
-     * @param language which language. NOTICE: may be ignored by service if locationId already determines language !
+     * @param fromLocationId the unique identifier of a location to find related locations for
+     * @param includeFrom should the location with the passed fromLocationId also be included in  the result ?</br>
+     * 		true=location is included and is <b>FIRST</b> location in result array</br>
+     * 		false=location is NOT included, first location in array is arbitrary location.
+     * @param language which language. NOTICE: may be ignored if locationId already determines language !
      * @return Array of related locations for passed location (or empty array)
-     * 		NOTICE: SNS knows "expired" locations. These ones are not returned !
+     * 		NOTICE: SNS knows "expired" locations. These ones are not returned !</br>
+     * 		If passed <code>includeFrom</code> is true the the first location in array is location with
+     * 		passed <code>fromLocationId</code> (but NOT if that one is "expired").
      */
-    Location[] getRelatedLocationsFromLocation(String locationId, Locale language);
+    Location[] getRelatedLocationsFromLocation(String fromLocationId, boolean includeFrom, Locale language);
 
     /**
      * Get location with given id.
@@ -100,7 +105,7 @@ public interface GazetteerService {
      * </br>NOTICE: we always target topics of type "/location" (=Location Entry)
      * </ul>
      * @param locationId the unique identifier of the location in gazetteer
-     * @param language which language to fetch. NOTICE: may be ignored by service if locationId already determines language !
+     * @param language which language to fetch. NOTICE: may be ignored if locationId already determines language !
      * @return the found location or null if not found.
      * 		NOTICE: SNS knows "expired" locations. We always return the location found NO MATTER whether expired or not !
      */
