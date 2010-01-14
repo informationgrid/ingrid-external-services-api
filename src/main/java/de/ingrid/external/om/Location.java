@@ -79,7 +79,7 @@ public interface Location {
 	 * Set the type of the location as name (utilized in SNS). E.g. in SNS this is "Nature Park"
 	 * (for type id "naturalParkType") or "Federal State" (for type id "use2Type") ... 
 	 * If not using SNS set here your according type of the location as name (if provided).
-	 * Also set your typeName as typeId.
+	 * Also set your typeName as typeId. This typeName may be rendered additionally to the location name !
 	 * @param typeName type of the location e.g. "Federal State" or "Nature Park" ... (utilized in SNS)
      * @see setTypeId
 	 */
@@ -109,9 +109,10 @@ public interface Location {
 
 	/**
 	 * Set the native key of the location (utilized in SNS). E.g. when using SNS
-	 * this is a "regional key" (RS) or "commune key" (AGS). If you do have an administrative
-	 * code of the location provide it here. This code will be used when indexing web sites
-	 * and can be added to the search via Extended Search ! Otherwise leave it empty.
+	 * this is a "regional key" (RS) or "commune key" (AGS). If you do have a standardized
+	 * administrative code of the location provide it here. This code will be used when indexing
+	 * web sites and can be added to the search via Extended Search (query field "areaid") !
+	 * Otherwise leave it empty.
 	 * @param nativeKey administrative code of the location (utilized in SNS)
 	 */
 	public void setNativeKey(String nativeKey);
