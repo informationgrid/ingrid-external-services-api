@@ -8,6 +8,7 @@ package de.ingrid.external.om;
  * Mandatory content (NOT NULL):
  * <ul><li><code>id</code>: arbitrary unique identifier of the location in the gazetteer 
  * <li><code>name</code>: the name of the location
+ * <li><code>isExpired</code>: boolean value indicating whether the location is expired (utilized in SNS)
  * </ul>
   * NOTICE: dependent from the context further data could be provided.
  * E.g. if location is a result of a full classification of a text or URL (see 
@@ -112,4 +113,16 @@ public interface Location {
 	 * @return defined code of the location (utilized in SNS) or NULL
 	 */
 	public String getNativeKey();
+
+	/**
+	 * SNS knows "expired" locations. Set to true if the location is expired !
+	 * @param isExpired set to true if location is expired. DEFAULT is false ! (utilized in SNS)
+	 */
+	public void setIsExpired(boolean isExpired);
+
+	/**
+	 * SNS knows "expired" locations. Set to true if the location is expired !
+	 * @return true if location is expired. DEFAULT is false (not expired)(utilized in SNS)
+	 */
+	public boolean getIsExpired();
 }

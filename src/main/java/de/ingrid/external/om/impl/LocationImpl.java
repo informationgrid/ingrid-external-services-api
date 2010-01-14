@@ -13,6 +13,7 @@ public class LocationImpl implements Location {
 	private String name;
 	private String qualifier;
 	private String nativeKey;
+	private boolean isExpired = false;
 	
 	// The coordinates are stored as:
 	// 		lower left corner longitude, lower left corner latitude, 
@@ -52,6 +53,11 @@ public class LocationImpl implements Location {
 	@Override
 	public String getNativeKey() {
 		return nativeKey;
+	}
+
+	@Override
+	public boolean getIsExpired() {
+		return isExpired;
 	}
 
 	@Override
@@ -97,6 +103,11 @@ public class LocationImpl implements Location {
 		this.nativeKey = nativeKey;
 	}
 
+	@Override
+	public void setIsExpired(boolean isExpired) {
+		this.isExpired = isExpired;
+	}
+
 	public String toString() {
 		String result = "[";
 		result += "ID: "+this.id;
@@ -105,6 +116,7 @@ public class LocationImpl implements Location {
 		result += ", Type Name: "+this.typeName;
 		result += ", Qualifier: "+this.qualifier;
 		result += ", Native Key: "+this.nativeKey;
+		result += ", Expired: "+this.isExpired;
 		if (this.boundingBox != null && this.boundingBox.length == 4) {
 			result += ", WGS84Box: "+this.boundingBox[0]+","+this.boundingBox[1]+" "+this.boundingBox[2]+","+this.boundingBox[3];
 		}
