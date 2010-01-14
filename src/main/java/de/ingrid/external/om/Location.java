@@ -10,9 +10,10 @@ package de.ingrid.external.om;
  * <li><code>name</code>: the name of the location
  * <li><code>isExpired</code>: boolean value indicating whether the location is expired (utilized in SNS)
  * </ul>
-  * NOTICE: dependent from the context further data could be provided.
- * E.g. if location is a result of a full classification of a text or URL (see 
- * FullClassifyService) then as much data as possible should be provided.
+ * Further data may be SNS specific and can be ignored if the data cannot be provided with
+ * another Gazetteer (EGN), see javadoc of setters.</br>
+ * Important data is BBox information or nativeKey (administrative code of location).
+ * This one may be used in Extended Search and indexing of web sites. 
 */
 public interface Location {
 
@@ -41,7 +42,7 @@ public interface Location {
 	public String getName();
 
 	/**
-	 * Set the bounding box of the location in WGS84 coordinates.
+	 * Set the bounding box of the location in WGS84 coordinates. Provide whenever possible.
 	 * @param bottomLeftLong lower left longitude in WGS84
 	 * @param bottomLeftLat lower left latitude in WGS84
 	 * @param upperRightLong upper right longitude in WGS84
@@ -57,60 +58,68 @@ public interface Location {
 	public float[] getBoundingBox();
 
 	/**
-	 * Set the type id of the location, e.g. when using SNS
-	 * this is an identifier indicating a Nature Park ("naturalParkType") or Federal State ("use2Type") ...
-	 * @param typeId the id of the type of the location (utilized in SNS) 
+	 * Set the id of the type of the location (utilized in SNS). In SNS typeId is separated from typeName
+	 * for further evaluation. If you do have a typeName (see below) you can also set it here. Otherwise
+	 * do not set it.
+	 * E.g. in SNS this is an identifier indicating a Nature Park ("naturalParkType") or Federal State ("use2Type") ...
+	 * @param typeId the id of the type of the location (utilized in SNS).
      * @see setTypeName
 	 */
 	public void setTypeId(String typeId);
 
 	/**
-	 * Get the type id of the location, e.g. when using SNS
-	 * this is an identifier indicating a Nature Park ("naturalParkType") or Federal State ("use2Type") ...
+	 * Get the type id of the location (utilized in SNS). E.g. in SNS this is an identifier
+	 * indicating a Nature Park ("naturalParkType") or Federal State ("use2Type") ...
 	 * @return the id of the type of the location (utilized in SNS) or NULL
      * @see getTypeName
 	 */
 	public String getTypeId();
 
 	/**
-	 * Set the according name of the type of the location, e.g. when using SNS
-	 * this is "Nature Park" (for type id "naturalParkType") or "Federal State" (for type id "use2Type") ...
-	 * @param typeName the according name of the type id of the location (utilized in SNS)
+	 * Set the type of the location as name (utilized in SNS). E.g. in SNS this is "Nature Park"
+	 * (for type id "naturalParkType") or "Federal State" (for type id "use2Type") ... 
+	 * If not using SNS set here your according type of the location as name (if provided).
+	 * Also set your typeName as typeId.
+	 * @param typeName type of the location e.g. "Federal State" or "Nature Park" ... (utilized in SNS)
      * @see setTypeId
 	 */
 	public void setTypeName(String typeName);
 
 	/**
-	 * Get the according name of the type of the location, e.g. when using SNS
+	 * Get the type of the location as name (utilized in SNS). E.g. when using SNS
 	 * this is "Nature Park" (for type id "naturalParkType") or "Federal State" (for type id "use2Type") ...
-	 * @return the according name of the type id of the location (utilized in SNS) or NULL
+	 * @return type of the location e.g. "Federal State" or "Nature Park" ... (utilized in SNS)
      * @see getTypeId
 	 */
 	public String getTypeName();
 
 	/**
-	 * Set the additional qualifier of the location, e.g. name affix.
-	 * @param qualifier additional qualifier of location (utilized in SNS)
+	 * Set an additional qualifier for homographs (utilized in SNS).
+	 * E.g. this can be a name affix further clarifying the location name.
+	 * Leave empty if not provided in Gazetteer.
+	 * @param qualifier additional qualifier of location name (utilized in SNS)
 	 */
 	public void setQualifier(String qualifier);
 
 	/**
-	 * Get the additional qualifier of the location, e.g. name affix.
-	 * @return additional qualifier of location (utilized in SNS) or NULL
+	 * Get the additional qualifier of the location name, e.g. name affix.
+	 * @return additional qualifier of location name (utilized in SNS) or NULL
 	 */
 	public String getQualifier();
 
 	/**
-	 * Set the native key of the location, e.g. when using SNS
-	 * this is a "regional key" (RS) or "commune key" (AGS).
-	 * @param nativeKey defined code of the location (utilized in SNS)
+	 * Set the native key of the location (utilized in SNS). E.g. when using SNS
+	 * this is a "regional key" (RS) or "commune key" (AGS). If you do have an administrative
+	 * code of the location provide it here. This code will be used when indexing web sites
+	 * and can be added to the search via Extended Search ! Otherwise leave it empty.
+	 * @param nativeKey administrative code of the location (utilized in SNS)
 	 */
 	public void setNativeKey(String nativeKey);
 
 	/**
 	 * Get the native key of the location, e.g. when using SNS
 	 * this is a "regional key" (RS) or "commune key" (AGS).
-	 * @return defined code of the location (utilized in SNS) or NULL
+	 * @return administrative code of the location (utilized in SNS) or NULL
 	 */
 	public String getNativeKey();
 

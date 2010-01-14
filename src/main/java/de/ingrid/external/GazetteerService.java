@@ -38,7 +38,7 @@ public interface GazetteerService {
      * Search for location by an arbitrary query term (single word or words belonging together).
      * This allows search with additional search criteria like typeOfQuery and matching type. 
      * This one is separated from <code>getLocationsFromText</code> because a different method
-     * is called when using SNS (findTopics). There specific <b>types</b> of locations can be queried !<br/>
+     * is called when using SNS (findTopics). Here specific <b>types</b> of locations can be queried !<br/>
      * <ul>
      * <li>used in IGE when location of catalog is chosen. There only administrative locations are queried !
      * <li>when using SNS here's the method used: http://www.semantic-network.de/doc_findtopics.html?lang=en
@@ -47,7 +47,7 @@ public interface GazetteerService {
      * @param queryTerm an arbitrary term (single word or words belonging together). 
      * @param typeOfQuery which type of locations to query from gazetteer (utilized in SNS)
      * @param matching occurence of the query term during search. Supports exact match, beginning of word, and contained.
-     * @param language language of queryTerm
+     * @param language language of queryTerm and results
      * @return Array of Locations found for queryTerm (or empty array).
      * 		NOTICE: SNS knows "expired" locations. These ones are not returned !
      */
@@ -63,7 +63,7 @@ public interface GazetteerService {
      * PortalU: http://localhost:8080/ingrid-portal/portal/search-extended/search-ext-env-place-geothesaurus.psml
      * <br/>Enter text and click "Look-up Geographic Names"
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_autoclassifytext.html?lang=en
-     * </br>NOTICE: not all parameters are part of UI.
+     * </br>NOTICE: not all parameters are part of web UI.
      * </ul>
      * @param text any kind of text to classify
      * @param analyzeMaxWords The maximal number of words to analyze.
@@ -86,14 +86,15 @@ public interface GazetteerService {
      * </br>NOTICE: we always target topics of type "/location" (=Location Entry)
      * </ul>
      * @param fromLocationId the unique identifier of a location to find related locations for
-     * @param includeFrom should the location with the passed fromLocationId also be included in  the result ?</br>
+     * @param includeFrom should the location with the passed fromLocationId also be included in  the results ?</br>
      * 		true=location is included and is <b>FIRST</b> location in result array</br>
      * 		false=location is NOT included, first location in array is arbitrary location.
      * @param language which language. NOTICE: may be ignored if locationId already determines language !
      * @return Array of related locations for passed location (or empty array)
      * 		NOTICE: SNS knows "expired" locations. These ones are not returned !</br>
      * 		If passed <code>includeFrom</code> is true the the first location in array is location with
-     * 		passed <code>fromLocationId</code> (but NOT if that one is "expired").
+     * 		passed <code>fromLocationId</code> (but NOT if that one is "expired", only non "expired" locations
+     * 		are returned !).
      */
     Location[] getRelatedLocationsFromLocation(String fromLocationId, boolean includeFrom, Locale language);
 
@@ -107,7 +108,8 @@ public interface GazetteerService {
      * @param locationId the unique identifier of the location in gazetteer
      * @param language which language to fetch. NOTICE: may be ignored if locationId already determines language !
      * @return the found location or null if not found.
-     * 		NOTICE: SNS knows "expired" locations. We always return the location found NO MATTER whether expired or not !
+     * 		NOTICE: SNS knows "expired" locations. We always return the location found no matter
+     * 		whether expired or not ! The location contains expired info (<code>isExpired</code>).
      */
     Location getLocation(String locationId, Locale language);
 }
