@@ -1,5 +1,6 @@
 package de.ingrid.external.om.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.ingrid.external.om.Event;
@@ -17,6 +18,12 @@ public class FullClassifyResultImpl implements FullClassifyResult {
 	private List<Location> locations;
 	private List<Term> terms;
 	private List<Event> events;
+
+	public FullClassifyResultImpl() {
+		locations = new ArrayList<Location>();
+		terms = new ArrayList<Term>();
+		events = new ArrayList<Event>();
+	}
 
 	@Override
 	public IndexedDocument getIndexedDocument() {
@@ -61,13 +68,13 @@ public class FullClassifyResultImpl implements FullClassifyResult {
 	public String toString() {
 		String result = "[";
 		result += "IndexedDocument: " + this.indexedDocument;
-		if (this.locations != null) {
+		if (this.locations.size() > 0) {
 			result += ", Locations: "+this.locations;
 		}
-		if (this.terms != null) {
+		if (this.terms.size() > 0) {
 			result += ", Terms: "+this.terms;
 		}
-		if (this.events != null) {
+		if (this.events.size() > 0) {
 			result += ", Events: "+this.events;
 		}
 		result += "]";
