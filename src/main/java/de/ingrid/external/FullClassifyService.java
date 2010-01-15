@@ -10,29 +10,46 @@ import de.ingrid.external.om.FullClassifyResult;
 
 
 /**
- * Service used for extracting "full" data (e.g. meta data like terms, locations, ...) from document/URL.<p>
+ * Service used for extracting "full" data (e.g. meta data like terms, locations, ...) from document/URL.
  */
 public interface FullClassifyService {
-	
+
+	/** How should the text be classified ? Extract all infos possible or only partial infos ?
+	 * This FilterType determines which partial info to extract. */
+	public enum FilterType {
+		/** request only terms (ThesaurusService) as result of classification */
+		ONLY_TERMS,
+		/** request only locations (GazetteerService) as result of classification */
+		ONLY_LOCATIONS,
+		/** request only events (time information) as result of classification */
+		ONLY_EVENTS;
+	}
+
     /**
-     * Analyze the given URL. Extract terms, locations etc.
+     * Analyze the given URL. Extract terms, locations, events (time information).
+     * This data is used for indexing web sites, meaning added as metadata to the index.
+     * E.g. classified locations BBox/nativeKey information may be added
+     * as metadata to the index.</br>
      * When using SNS the autoclassify method of SNS is used.<br/>
-     * <ul><li>used in Metadata-Editor when new metadata record is created via
+     * <ul>
+     * <li>used in Metadata-Editor when new metadata record is created via
      * the wizard. There a URL can be entered, the API is called and the wizard
      * shows the results as suggestion for the content of the new record
      * <li>used in iPlug when indexing content (e.g. webpages) to enrich the
      * index with thesaurus, gazetteer, time information etc. Then this additional data
      * can be queried from the Portal (e.g. when searching for a thesaurus term)
      * delivering the according content (e.g. the webpage)
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_autoclassifyurl.html?lang=en
      * </ul>
      * @param url The url to analyze.
      * @param analyzeMaxWords The maximal number of words to analyze (body)
      * @param ignoreCase Set to true ignore capitalization of the document.
-     * @param lang language of the web page and the results. If passed language can't be processed
-     * 		or is null then default language may be used (PortalU: de, GS Soil: en)
-     * @return result containing all classified terms, locations etc.
-     * 	NOTICE: as much data as possible should be provided, e.g. locations should have
-     * 	bounding box where possible ! 
+     * @param filter Pass null to extract all infos possible ? If only partial data
+     * 		should be extracted pass according filter type.
+     * @param lang language of the web page and the results.
+     * @return result containing info about the document and the classified terms,
+     * 		locations and events dependent from passed filter type.
      */
-    public FullClassifyResult autoClassifyURL(URL url, int analyzeMaxWords, boolean ignoreCase, Locale language);
+    public FullClassifyResult autoClassifyURL(URL url, int analyzeMaxWords, boolean ignoreCase,
+    		FilterType filter, Locale language);
 }
