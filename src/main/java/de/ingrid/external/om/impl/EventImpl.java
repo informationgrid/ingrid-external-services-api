@@ -10,6 +10,7 @@ import de.ingrid.external.om.Event;
 public class EventImpl implements Event {
 
 	private String id;
+	private String typeId;	 // e.g. for SNS: activityType, disasterType, ... 
 	private String title;
 	private String description;
 	private Date timeAt;
@@ -47,6 +48,11 @@ public class EventImpl implements Event {
 	}
 
 	@Override
+	public String getTypeId() {
+		return typeId;
+	}
+
+	@Override
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -76,10 +82,16 @@ public class EventImpl implements Event {
 		this.title = title;
 	}
 
+	@Override
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
+	}
+
 	public String toString() {
 		String result = "[";
 		result += "ID: "+this.id;
 		result += ", Title: "+this.title;
+		result += ", Type ID: "+this.typeId;
 		result += ", Description: "+this.description;
 		result += ", TimeAt: "+this.timeAt;
 		result += ", TimeFrom: "+this.timeFrom;

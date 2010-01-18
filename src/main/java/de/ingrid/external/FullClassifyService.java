@@ -48,7 +48,7 @@ public interface FullClassifyService {
      * 		should be extracted pass according filter type.
      * @param lang language of the web page and the results.
      * @return result containing info about the document and the classified terms,
-     * 		locations and events dependent from passed filter type.
+     * 		locations and events dependent from passed filter type. NEVER NULL.
      */
     public FullClassifyResult autoClassifyURL(URL url, int analyzeMaxWords, boolean ignoreCase,
     		FilterType filter, Locale language);

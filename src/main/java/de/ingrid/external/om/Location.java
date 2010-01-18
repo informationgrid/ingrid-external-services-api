@@ -60,9 +60,10 @@ public interface Location {
 	/**
 	 * Set the id of the type of the location (utilized in SNS). In SNS typeId is separated from typeName
 	 * for further evaluation. If you do have a typeName (see below) you can also set it here. Otherwise
-	 * do not set it.
+	 * do not set it. This typeName may be rendered additionally to the location name !
 	 * E.g. in SNS this is an identifier indicating a Nature Park ("naturalParkType") or Federal State ("use2Type") ...
 	 * @param typeId the id of the type of the location (utilized in SNS).
+	 * 		Pass full name of type (typeName) if not using SNS.
      * @see setTypeName
 	 */
 	public void setTypeId(String typeId);
@@ -70,6 +71,7 @@ public interface Location {
 	/**
 	 * Get the type id of the location (utilized in SNS). E.g. in SNS this is an identifier
 	 * indicating a Nature Park ("naturalParkType") or Federal State ("use2Type") ...
+	 * If not using SNS the typeId is the full name of the type of the location if set. 
 	 * @return the id of the type of the location (utilized in SNS) or NULL
      * @see getTypeName
 	 */

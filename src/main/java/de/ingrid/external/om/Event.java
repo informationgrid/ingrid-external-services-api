@@ -87,4 +87,22 @@ public interface Event {
 	 * @return upper limit of time range OR NULL (if event is single point in time)
 	 */
 	public Date getTimeRangeTo();
+
+	/**
+	 * Set the id of the type of the event (utilized in SNS). E.g. in SNS this is an
+	 * identifier indicating a Disaster ("disasterType") or Measure ("activityType") ...
+	 * When not using SNS pass here the full name of the type of the event if you can provide it. 
+	 * Otherwise do not set it.
+	 * @param typeId the id of the type of the event (utilized in SNS). Pass full name of type
+	 * 		if not using SNS.
+	 */
+	public void setTypeId(String typeId);
+
+	/**
+	 * Get the id of the type of the event (utilized in SNS). E.g. in SNS this is an
+	 * identifier indicating a Disaster ("disasterType") or Measure ("activityType") ...
+	 * When not using SNS the typeId is the full name of the type of the event if set. 
+	 * @return the id of the type of the event (utilized in SNS) or NULL.
+	 */
+	public String getTypeId();
 }
