@@ -36,7 +36,7 @@ public interface FullClassifyService {
      * the wizard. There a URL can be entered, the API is called and the wizard
      * shows the results as suggestion for the content of the new record
      * <li>used in iPlug when indexing content (e.g. webpages) to enrich the
-     * index with thesaurus, gazetteer, time information etc. Then this additional data
+     * index with thesaurus, gazetteer, time information. Then this additional data
      * can be queried from the Portal (e.g. when searching for a thesaurus term)
      * delivering the according content (e.g. the webpage)
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_autoclassifyurl.html?lang=en
@@ -51,5 +51,28 @@ public interface FullClassifyService {
      * 		locations and events dependent from passed filter type. NEVER NULL.
      */
     public FullClassifyResult autoClassifyURL(URL url, int analyzeMaxWords, boolean ignoreCase,
+    		FilterType filter, Locale language);
+
+    /**
+     * Analyze the given Text. Extract terms, locations, events (time information).
+     * <ul>
+     * <li>used in iPlug when indexing content to enrich the index with thesaurus,
+     * gazetteer, time information.
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_autoclassifytext.html?lang=en
+     * </ul>
+     * @param text any kind of text to classify
+     * @param analyzeMaxWords The maximal number of words to analyze (body)
+     * @param ignoreCase Set to true ignore capitalization of the document.
+     * @param filter Pass null to extract all infos possible ? If only partial data
+     * 		should be extracted pass according filter type.</br>
+     * 		NOTICE: When filtering TERMS or LOCATIONS the result equals
+     * 		ThesaurusService.getTermsFromText / GazetteerService.getLocationsFromText
+     * @param lang language of the web page and the results.
+     * @return result containing info about the document and the classified terms,
+     * 		locations and events dependent from passed filter type. NEVER NULL.
+     * 		NOTICE: The info about the document (IndexedDocument) in the result may only
+     * 		contain partial stuff (no URL etc.) 
+     */
+    public FullClassifyResult autoClassifyText(String text, int analyzeMaxWords, boolean ignoreCase,
     		FilterType filter, Locale language);
 }

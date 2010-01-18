@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Part of the result of a FULL classify request for a document or url.<p>
+ * Part of the result of a FULL classify request for a document (text) or url.<p>
  * Contains general extracted info of the document/url.
   * Mandatory content (NOT NULL):
  * <ul><li><code>ClassifyTimeStamp</code>: the date the classification was executed
