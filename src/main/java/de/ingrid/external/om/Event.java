@@ -9,9 +9,10 @@ import java.util.Date;
  * An Event represents time information with which a document/url can be classified.
  * This can be a concrete incident in time or some info about the historical context (SNS).
  * This data is used for enrichment of the search index with time references.<p>
- * Mandatory content (NOT NULL):
- * <ul><li><code>id</code>: arbitrary unique identifier of the event
- * <li><code>title</code>: the title of the event. The title may be added as metadata to the search index.
+ * An Event in the API may be only used for adding a time reference without any further
+ * information (no real event). If so, you do not have to add an ID or TITLE or TYPE
+ * (the event can not be reproduced then). 
+ * Mandatory content:
  * <li><code>time...</code>: the time reference. Can be set as single point in time (<code>TimeAt</code>) OR<br/>
  * as a time range (interval) [<code>TimeRangeFrom</code>, <code>TimeRangeTo</code>]. This data
  * is added to the search index !
@@ -20,30 +21,28 @@ import java.util.Date;
 public interface Event {
 
     /**
-     * Set id of the event.
-	 * @param id unique identifier of the event, NEVER NULL
+     * Set id of the event. If you just want to add a time reference for indexing
+     * do not set the Id.
+	 * @param id unique identifier of the event or NULL (if "event" is just a time reference)
      */
     public void setId(String id);
 
     /**
 	 * Get the id of the event.
-	 * @return the unique identifier of the event, NEVER NULL
+	 * @return the unique identifier of the event or NULL (if "event" is just a time reference)
      */
     public String getId();
 
     /**
-	 * Set the title of the event. If you do not have a specific title
-	 * you may pass an empty string, then no event title will be added to
-	 * the search index.
-     * @param title event title, NEVER NULL. May be empty string if event
-     * 		is just a time reference.
+	 * Set the title of the event. If you just want to add a time reference
+	 * for indexing do not set the title.
+     * @param title event title or NULL (if "event" is just a time reference)
      */
     public void setTitle(String title);
 
     /**
 	 * Get the title of the event.
-	 * @return the title of the event, NEVER NULL.
-	 * 		NOTICE: May be empty string if event is just a time reference.
+	 * @return the title of the event or NULL (if "event" is just a time reference)
      */
     public String getTitle();
 
