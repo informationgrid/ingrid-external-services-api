@@ -6,12 +6,15 @@ package de.ingrid.external.om;
 import java.util.Date;
 
 /**
- * Representation of an Event (utilized by SNS).<p>
+ * An Event represents time information with which a document/url can be classified.
+ * This can be a concrete incident in time or some info about the historical context (SNS).
+ * This data is used for enrichment of the search index with time references.<p>
  * Mandatory content (NOT NULL):
  * <ul><li><code>id</code>: arbitrary unique identifier of the event
- * <li><code>title</code>: the title of the event
- * <li><code>time...</code>: the time reference can be set as single point in time (<code>TimeAt</code>) OR<br/>
- * as a time range (interval) [<code>TimeRangeFrom</code>, <code>TimeRangeTo</code>].
+ * <li><code>title</code>: the title of the event. The title may be added as metadata to the search index.
+ * <li><code>time...</code>: the time reference. Can be set as single point in time (<code>TimeAt</code>) OR<br/>
+ * as a time range (interval) [<code>TimeRangeFrom</code>, <code>TimeRangeTo</code>]. This data
+ * is added to the search index !
  * </ul>
  */
 public interface Event {
@@ -29,14 +32,18 @@ public interface Event {
     public String getId();
 
     /**
-	 * Set the title of the event.
-     * @param title event title, NEVER NULL
+	 * Set the title of the event. If you do not have a specific title
+	 * you may pass an empty string, then no event title will be added to
+	 * the search index.
+     * @param title event title, NEVER NULL. May be empty string if event
+     * 		is just a time reference.
      */
     public void setTitle(String title);
 
     /**
 	 * Get the title of the event.
-	 * @return the title of the event, NEVER NULL
+	 * @return the title of the event, NEVER NULL.
+	 * 		NOTICE: May be empty string if event is just a time reference.
      */
     public String getTitle();
 
@@ -48,7 +55,7 @@ public interface Event {
 
     /**
 	 * Get the description of the event.
-	 * @return the description of the event
+	 * @return the description of the event or NULL
      */
     public String getDescription();
 
@@ -91,8 +98,8 @@ public interface Event {
 	/**
 	 * Set the id of the type of the event (utilized in SNS). E.g. in SNS this is an
 	 * identifier indicating a Disaster ("disasterType") or Measure ("activityType") ...
-	 * When not using SNS pass here the full name of the type of the event if you can provide it. 
-	 * Otherwise do not set it.
+	 * When not using SNS pass here the full name of the type of the event if you can
+	 * provide it. Otherwise do not set it.
 	 * @param typeId the id of the type of the event (utilized in SNS). Pass full name of type
 	 * 		if not using SNS.
 	 */
@@ -101,8 +108,9 @@ public interface Event {
 	/**
 	 * Get the id of the type of the event (utilized in SNS). E.g. in SNS this is an
 	 * identifier indicating a Disaster ("disasterType") or Measure ("activityType") ...
-	 * When not using SNS the typeId is the full name of the type of the event if set. 
-	 * @return the id of the type of the event (utilized in SNS) or NULL.
+	 * When not using SNS the typeId may be the full name of the type of the event if set. 
+	 * @return the id of the type of the event (utilized in SNS) or NULL. If not using SNS
+	 * 		the typeId may be the full name of the type.
 	 */
 	public String getTypeId();
 }

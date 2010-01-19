@@ -10,7 +10,7 @@ import de.ingrid.external.om.FullClassifyResult;
 
 
 /**
- * Service used for extracting "full" data (e.g. meta data like terms, locations, ...) from document/URL.
+ * Service used for extracting "full" data (meta data like terms, locations, events) from document/URL.
  */
 public interface FullClassifyService {
 
@@ -27,42 +27,45 @@ public interface FullClassifyService {
 
     /**
      * Analyze the given URL. Extract terms, locations, events (time information).
-     * This data is used for indexing web sites, meaning added as metadata to the index.
-     * E.g. classified locations BBox/nativeKey information may be added
-     * as metadata to the index.</br>
+     * This data is used for indexing web sites and is added as metadata to the index.
+     * E.g. from classified locations BBox/nativeKey information may be added.</br>
      * When using SNS the autoclassify method of SNS is used.<br/>
      * <ul>
      * <li>used in Metadata-Editor when new metadata record is created via
-     * the wizard. There a URL can be entered, the API is called and the wizard
-     * shows the results as suggestion for the content of the new record
+     * the wizard. There a URL can be entered and the wizard shows the results
+     * of classification as suggestion for the content of the new record.
      * <li>used in iPlug when indexing content (e.g. webpages) to enrich the
      * index with thesaurus, gazetteer, time information. Then this additional data
-     * can be queried from the Portal (e.g. when searching for a thesaurus term)
-     * delivering the according content (e.g. the webpage)
+     * can be queried from the Portal delivering the according content (webpage)
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_autoclassifyurl.html?lang=en
      * </ul>
      * @param url The url to analyze.
      * @param analyzeMaxWords The maximal number of words to analyze (body)
-     * @param ignoreCase Set to true ignore capitalization of the document.
-     * @param filter Pass null to extract all infos possible ? If only partial data
+     * @param ignoreCase Set to true to ignore capitalization of the document.
+     * @param filter Pass null to extract all information possible ? If only partial data
      * 		should be extracted pass according filter type.
      * @param lang language of the web page and the results.
-     * @return result containing info about the document and the classified terms,
-     * 		locations and events dependent from passed filter type. NEVER NULL.
+     * @return classification result containing general info about the document (IndexedDocument)
+     * 		and the classified terms, locations and events dependent from passed filter type.
+     * 		NEVER NULL.
      */
     public FullClassifyResult autoClassifyURL(URL url, int analyzeMaxWords, boolean ignoreCase,
     		FilterType filter, Locale language);
 
     /**
      * Analyze the given Text. Extract terms, locations, events (time information).
+     * This is the same functionality as autoClassifyURL. Use this method if you already
+     * have the document (text) to classify. NOTICE: When calling this method with the
+     * according filter (ONLY_TERMS, ONLY_LOCATIONS) this matches the according call
+     * to ThesaurusService.getTermsFromText or GazetteerService.getLocationsFromText !
      * <ul>
      * <li>used in iPlug when indexing content to enrich the index with thesaurus,
      * gazetteer, time information.
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_autoclassifytext.html?lang=en
      * </ul>
      * @param text any kind of text to classify
-     * @param analyzeMaxWords The maximal number of words to analyze (body)
-     * @param ignoreCase Set to true ignore capitalization of the document.
+     * @param analyzeMaxWords The maximal number of words to analyze
+     * @param ignoreCase Set to true to ignore capitalization of the document.
      * @param filter Pass null to extract all infos possible ? If only partial data
      * 		should be extracted pass according filter type.</br>
      * 		NOTICE: When filtering TERMS or LOCATIONS the result equals

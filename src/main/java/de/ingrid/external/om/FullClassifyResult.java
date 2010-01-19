@@ -4,8 +4,8 @@ import java.util.List;
 
 /**
  * Result of a FULL classify request for a document/url.<p>
- * Contains info about the document and found thesaurus terms / gazetteer locations / 
- * events (utilized by SNS) ...<br/>
+ * Contains general info about the document and classified thesaurus terms / gazetteer locations / 
+ * events (time information).<br/>
  * Mandatory content (NOT NULL):
  * <ul><li><code>IndexedDocument</code>: Contains general extracted info of the document/url
  * </ul>
@@ -51,13 +51,13 @@ public interface FullClassifyResult {
 	public void setLocations(List<Location> locations);
 
 	/**
-	 * Get the events found in classification (utilized by SNS).
+	 * Get the events (time information) found in classification (utilized by SNS).
 	 * @return list of events or empty list. NEVER NULL
 	 */
 	public List<Event> getEvents();
 
 	/**
-	 * Set the events found in classification (utilized by SNS).  
+	 * Set the events (time information) found in classification (utilized by SNS).  
 	 * @param events list of events or empty list. NEVER NULL
 	 */
 	public void setEvents(List<Event> events);

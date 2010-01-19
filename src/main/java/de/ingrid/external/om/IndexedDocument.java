@@ -14,6 +14,18 @@ import java.util.Locale;
 public interface IndexedDocument {
 
 	/**
+	 * Get the date when the classification was executed.
+	 * @return date when the classification was executed, never null
+	 */
+	public Date getClassifyTimeStamp();
+
+	/**
+	 * Set the date when the classification was executed.
+	 * @param timeStamp date when the classification was executed, never null
+	 */
+	public void setClassifyTimeStamp(Date timeStamp);
+
+	/**
 	 * Get the extracted title of the document.
 	 * @return extracted title or null
 	 */
@@ -101,16 +113,4 @@ public interface IndexedDocument {
 	 * @param to the extracted "to time reference" (end point)
 	 */
 	public void setTimeTo(Date to);
-
-	/**
-	 * Get the date when the classification was executed.
-	 * @return date when the classification was executed, never null
-	 */
-	public Date getClassifyTimeStamp();
-
-	/**
-	 * Set the date when the classification was executed.
-	 * @param timeStamp date when the classification was executed, never null
-	 */
-	public void setClassifyTimeStamp(Date timeStamp);
 }
