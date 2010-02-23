@@ -31,7 +31,8 @@ public interface ThesaurusService {
 
     /**
      * Search for thesaurus terms by an arbitrary query term (single word or multiple words belonging together).
-     * This allows search with additional search criteria like matching type. 
+     * This allows search with additional search criteria like matching type.
+     * NOTICE: Search should be case insensitive (case ignored).
      * <ul>
      * <li>PortalU: used in IGE (InGridEditor) to search term
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_findtopics.html?lang=en

@@ -41,13 +41,13 @@ public interface Term {
 	public TermType getType();
 
 	/**
-	 * Set the id of the term. 
+	 * Set the id of the term. NOTICE: SHOULD NOT EXCEED LENGTH OF 255 !
 	 * @param id unique identifier of the term in the thesaurus, NEVER NULL
 	 */
 	public void setId(String id);
 
 	/**
-	 * Get the id of the term.
+	 * Get the id of the term. NOTICE: SHOULD NOT EXCEED LENGTH OF 255 !
 	 * @return the unique identifier of the term in the thesaurus, NEVER NULL
 	 */
 	public String getId();
