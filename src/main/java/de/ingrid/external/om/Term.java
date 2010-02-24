@@ -65,20 +65,20 @@ public interface Term {
 	public String getName();
 
 	/**
-	 * SNS SPECIFIC, ALWAYS NULL IF NOT USING SNS (GSSoil) !</br>
 	 * Set the alternate id of the term if present.<br/>
 	 * Utilized in SNS where ONE term can have different ids dependent from used thesaurus (UMTHES, GEMET).
-	 * This one holds the GEMET id if term has GEMET representation.
-	 * @param alternateId the alternate id of the term (utilized in SNS). NULL per default. 
+	 * This one holds the numeric GEMET id if term has a GEMET representation.
+	 * If this one is null, the term isn't handled as GEMET Term in InGrid !
+	 * @param alternateId the alternate id of the term. SET HERE NUMERIC GEMET ID IF PRESENT ! 
 	 */
 	public void setAlternateId(String alternateId);
 
 	/**
-	 * SNS SPECIFIC, ALWAYS NULL IF NOT USING SNS (GSSoil) !</br>
 	 * Get the alternate id of the term if present.<br/>
 	 * Utilized in SNS where ONE term can have different ids dependent from used thesaurus (UMTHES, GEMET).
-	 * This one holds the GEMET id if term has GEMET representation.
-	 * @return the alternate id of the term if present (utilized in SNS). NULL per default. 
+	 * This one holds the numeric GEMET id if term has a GEMET representation.
+	 * If this one is null, the term isn't handled as GEMET Term in InGrid !
+	 * @return the alternate id of the term if present. THIS IS THE GEMET ID IF PRESENT. NULL per default (then no GEMET term). 
 	 */
 	public String getAlternateId();
 

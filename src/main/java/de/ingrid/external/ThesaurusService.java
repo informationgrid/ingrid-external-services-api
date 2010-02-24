@@ -32,9 +32,9 @@ public interface ThesaurusService {
     /**
      * Search for thesaurus terms by an arbitrary query term (single word or multiple words belonging together).
      * This allows search with additional search criteria like matching type.
-     * NOTICE: Search should be case insensitive (case ignored).
+     * NOTICE: Search should be CASE INSENSITIVE (case ignored).
      * <ul>
-     * <li>PortalU: used in IGE (InGridEditor) to search term
+     * <li>PortalU: used in IGE (InGridEditor) to search term and display term in tehsaurus hierarchy
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_findtopics.html?lang=en
      * </br> we always search "also in the flexion of names"
      * </ul>
@@ -44,7 +44,8 @@ public interface ThesaurusService {
      * 		In this case their associated descriptors are added to the result list.
      * @param language language of queryTerm and the results.
      * @return Array of thesaurus terms found for queryTerm (or empty array).
-     * NOTICE: The Terms can be of arbitrary type (DESCRIPTOR, NON_DESCRIPTOR).
+     * NOTICE: The Terms can be of arbitrary type (DESCRIPTOR, NON_DESCRIPTOR) BUT SHOULD BE PRESENT IN THE THESAURUS HIERARCHY !
+     * Do NOT deliver terms which are not part of hierarchy tree !
      */
 	Term[] findTermsFromQueryTerm(String queryTerm, MatchingType matching, boolean addDescriptors,
 			Locale language);
