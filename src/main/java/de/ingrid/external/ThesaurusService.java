@@ -63,7 +63,7 @@ public interface ThesaurusService {
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_getsimilarterms.html?lang=en
      * </ul>
      * @param names arbitrary names (words) to search similar thesaurus terms for.
-     * @param language should the search be case sensitive (false) or ignore case (true)
+     * @param ignoreCase should the search be case sensitive (false) or ignore case (true)
      * @param language language of the names and the results.
      * @return Array of similar thesaurus terms (or empty array).
      * NOTICE: The terms are <b>ordered alphabetically, no duplicates</b>!

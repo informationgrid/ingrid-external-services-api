@@ -11,9 +11,9 @@ import java.util.Date;
  * This data is used for enrichment of the search index with time references.<p>
  * An Event in the API may be only used for adding a time reference without any further
  * information (no real event). If so, you do not have to add an ID or TITLE or TYPE
- * (the event can not be reproduced then). 
+ * (the event can not be reproduced then).<p>
  * Mandatory content:
- * <li><code>time...</code>: the time reference. Can be set as single point in time (<code>TimeAt</code>) OR<br/>
+ * <ul><li><code>time...</code>: the time reference. Can be set as single point in time (<code>TimeAt</code>) OR<br/>
  * as a time range (interval) [<code>TimeRangeFrom</code>, <code>TimeRangeTo</code>]. This data
  * is added to the search index !
  * </ul>

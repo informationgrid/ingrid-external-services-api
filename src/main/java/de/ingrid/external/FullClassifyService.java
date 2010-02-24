@@ -44,7 +44,7 @@ public interface FullClassifyService {
      * @param ignoreCase Set to true to ignore capitalization of the document.
      * @param filter Pass null to extract all information possible ? If only partial data
      * 		should be extracted pass according filter type.
-     * @param lang language of the web page and the results.
+     * @param language language of the web page and the results.
      * @return classification result containing general info about the document (IndexedDocument)
      * 		and the classified terms, locations and events dependent from passed filter type.
      * 		NEVER NULL.
@@ -70,7 +70,7 @@ public interface FullClassifyService {
      * 		should be extracted pass according filter type.</br>
      * 		NOTICE: When filtering TERMS or LOCATIONS the result equals
      * 		ThesaurusService.getTermsFromText / GazetteerService.getLocationsFromText
-     * @param lang language of the web page and the results.
+     * @param language language of the web page and the results.
      * @return result containing info about the document and the classified terms,
      * 		locations and events dependent from passed filter type. NEVER NULL.
      * 		NOTICE: The info about the document (IndexedDocument) in the result may only
