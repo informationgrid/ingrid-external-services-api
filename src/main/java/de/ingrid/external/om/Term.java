@@ -23,8 +23,8 @@ public interface Term {
 		/** the term is just a synonym for another DESCRIPTOR term and should not be used
 		 * as a describing term in meta data (utilized in SNS) */
 		NON_DESCRIPTOR,
-		/** the term is just a label in the hierarchy and should not be used
-		 * as a describing term in meta data (utilized in SNS) */
+		/** the term is just a label (group or supergroup) in the hierarchy and should not be used
+		 * as a describing term in meta data */
 		NODE_LABEL;
 	}
 
