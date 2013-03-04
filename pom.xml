@@ -9,11 +9,11 @@
   <groupId>de.ingrid</groupId>
   <artifactId>ingrid-external-services-api</artifactId>
   <packaging>jar</packaging>
-  <version>3.3.0</version>
+  <version>3.4.0-SNAPSHOT</version>
   <name>ingrid-external-services-api</name>
   <scm>
-    <connection>scm:svn:https://harrison.its-technidata.de:444/svn/ingrid/ingrid-external-services-api/tags/ingrid-external-services-api-3.3.0</connection>
-    <developerConnection>scm:svn:https://harrison.its-technidata.de:444/svn/ingrid/ingrid-external-services-api/tags/ingrid-external-services-api-3.3.0</developerConnection>
+    <connection>scm:svn:https://harrison.its-technidata.de:444/svn/ingrid/ingrid-external-services-api/trunk</connection>
+    <developerConnection>scm:svn:https://harrison.its-technidata.de:444/svn/ingrid/ingrid-external-services-api/trunk</developerConnection>
   </scm>
   <!-- NEVER DELETE: InGrid repo needed for download of base pom if not present ! -->
   <repositories>
