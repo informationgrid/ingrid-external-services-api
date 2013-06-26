@@ -34,7 +34,7 @@ public interface ThesaurusService {
      * This allows search with additional search criteria like matching type.
      * NOTICE: Search should be CASE INSENSITIVE (case ignored).
      * <ul>
-     * <li>PortalU: used in IGE (InGridEditor) to search term and display term in tehsaurus hierarchy
+     * <li>PortalU: used in IGE (InGridEditor) to search term and display term in thesaurus hierarchy
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_findtopics.html?lang=en
      * </br> we always search "also in the flexion of names"
      * </ul>

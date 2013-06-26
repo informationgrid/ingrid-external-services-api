@@ -32,12 +32,13 @@ public interface ChronicleService {
      * 
      * @param queryTerm is the term to be searched for
      * @param matching is the type of search (exact, contains, begins_with)
+     * @param inCollection defines in which collection the result has to be (historical, activity, ...)
      * @param dateStart is the date an event occured or started
      * @param dateEnd is the date an event ended
      * @param language determines the language of the events
      * @return an all events matching the control parameters
      */
-    Event[] findEventsFromQueryTerm(String queryTerm, MatchingType matching, String dateStart, String dateEnd, Locale language);
+    Event[] findEventsFromQueryTerm(String queryTerm, MatchingType matching, String[] inCollections, String dateStart, String dateEnd, Locale language);
 
     /**
      * Get all anniversaries that happened on a specific date (day and month). The date should be

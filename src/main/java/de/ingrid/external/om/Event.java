@@ -4,6 +4,7 @@
 package de.ingrid.external.om;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * An Event represents time information with which a document/url can be classified.
@@ -112,4 +113,17 @@ public interface Event {
 	 * 		the typeId may be the full name of the type.
 	 */
 	public String getTypeId();
+	
+	/**
+	 * Get all links connected to this event.
+	 * Used in Portal for further information. 
+	 * @return
+	 */
+	public List<Link> getLinks();
+	
+	/**
+	 * Add another link which is connected to this event.
+	 * @param link
+	 */
+	public void addLink(Link link);
 }

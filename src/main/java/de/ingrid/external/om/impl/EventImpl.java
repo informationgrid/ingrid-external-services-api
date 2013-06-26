@@ -1,8 +1,11 @@
 package de.ingrid.external.om.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import de.ingrid.external.om.Event;
+import de.ingrid.external.om.Link;
 
 /**
  * Default Implementation of Event Interface.
@@ -16,6 +19,7 @@ public class EventImpl implements Event {
 	private Date timeAt;
 	private Date timeFrom;
 	private Date timeTo;
+	private List<Link> links = new ArrayList<Link>();
 
 	@Override
 	public String getDescription() {
@@ -98,5 +102,15 @@ public class EventImpl implements Event {
 		result += ", TimeTo: "+this.timeTo;
 		result += "]";
 		return result;
+	}
+
+	@Override
+	public List<Link> getLinks() {
+		return links;
+	}
+
+	@Override
+	public void addLink(Link link) {
+		links.add(link);		
 	}
 }
