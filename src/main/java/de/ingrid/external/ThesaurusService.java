@@ -34,7 +34,7 @@ public interface ThesaurusService {
      * This allows search with additional search criteria like matching type.
      * NOTICE: Search should be CASE INSENSITIVE (case ignored).
      * <ul>
-     * <li>PortalU: used in IGE (InGridEditor) to search term and display term in tehsaurus hierarchy
+     * <li>PortalU: used in IGE (InGridEditor) to search term and display term in thesaurus hierarchy
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_findtopics.html?lang=en
      * </br> we always search "also in the flexion of names"
      * </ul>
@@ -48,6 +48,29 @@ public interface ThesaurusService {
      * Do NOT deliver terms which are not part of hierarchy tree !
      */
 	Term[] findTermsFromQueryTerm(String queryTerm, MatchingType matching, boolean addDescriptors,
+			Locale language);
+
+    /**
+     * Search for thesaurus terms by an arbitrary query term (single word or multiple words belonging together) within
+     * the given url domain. 
+     * This allows search with additional search criteria like matching type.
+     * NOTICE: Search should be CASE INSENSITIVE (case ignored).
+     * <ul>
+     * <li>PortalU: used in IGE (InGridEditor) to search term and display term in thesaurus hierarchy from an additional field
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_findtopics.html?lang=en
+     * </br> we always search "also in the flexion of names"
+     * </ul>
+     * @param url is the base url from where to search the queryTerm
+     * @param queryTerm an arbitrary term (single word or multiple words belonging together). Term does NOT mean "thesaurus term" here.
+     * @param matching occurence of the query term during search. Supports exact match, beginning of word, and contained.
+     * @param addDescriptors This option becomes only effective in case of non-descriptors in the result.
+     * 		In this case their associated descriptors are added to the result list.
+     * @param language language of queryTerm and the results.
+     * @return Array of thesaurus terms found for queryTerm (or empty array).
+     * NOTICE: The Terms can be of arbitrary type (DESCRIPTOR, NON_DESCRIPTOR) BUT SHOULD BE PRESENT IN THE THESAURUS HIERARCHY !
+     * Do NOT deliver terms which are not part of hierarchy tree !
+     */
+	Term[] findTermsFromQueryTerm(String url, String queryTerm, MatchingType matching, boolean addDescriptors,
 			Locale language);
 
     /**
@@ -135,6 +158,23 @@ public interface ThesaurusService {
      * their children. <b>See <code>TreeTerm</code></b>
      */
     TreeTerm[] getHierarchyNextLevel(String termId, Locale language);
+    
+    
+    /**
+     * Get all direct child terms of the given term in an Array (next hierarchy level) from a new given base url which points to 
+     * a thesaurus service. Pass null to request top terms.
+     * Used for browsing tree structure. NOTICE: Returned terms in array contain Term with given id as parent
+     * (OR null if top terms). Further the terms in the array contain their children, so 2 hierarchy
+     * levels are fetched. <b>See <code>TreeTerm</code></b>
+     * This is used in IGE for additional thesaurus fields, where the source is defined differently.
+     * @param url is used as base for requesting the thesaurus
+     * @param termId is the id of the term to get the hierarchy from based from url
+     * @param language which language
+     * @return Array containing next level of terms (or empty array if leaf). The terms contain their parent and
+     * their children. <b>See <code>TreeTerm</code></b>
+     */
+    TreeTerm[] getHierarchyNextLevel(String url, String termId, Locale language);
+    
 
     /**
      * Get the paths to the top in hierarchy starting at term with given id. NOTICE: A
@@ -152,4 +192,21 @@ public interface ThesaurusService {
      * contain their parent(s) as well till top. <b>See <code>TreeTerm</code></b>
      */
     TreeTerm getHierarchyPathToTop(String termId, Locale language);
+    
+    /**
+     * Get the paths to the top in hierarchy at a given url starting at term with given id. NOTICE: A
+     * term can have multiple parents, so ALL paths to the top should be determined.
+     * Used for searching term in a tree. The TreeTerm with the passed id is returned
+     * containing all of its parent(s). <b>See <code>TreeTerm</code></b>
+     * <ul>
+     * <li>PortalU: used in IGE (InGridEditor) to search term in tree of additional thesaurus field
+     * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_gethierarchy.html?lang=en
+     * </br>NOTICE: we always go "upwards" with a "depth of 0" (meaning to top) and "ignore siblings".
+     * </ul>
+     * @param termId the unique identifier of the term to determine parents from.
+     * @param language which language
+     * @return The starting term with the given id containing all of its parent(s). These parent(s)
+     * contain their parent(s) as well till top. <b>See <code>TreeTerm</code></b>
+     */
+    TreeTerm getHierarchyPathToTop(String url, String termId, Locale language);
 }

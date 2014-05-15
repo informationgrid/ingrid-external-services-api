@@ -14,6 +14,8 @@ public class LocationImpl implements Location {
 	private String qualifier;
 	private String nativeKey;
 	private boolean isExpired = false;
+	private String expiredDate;
+	private String[] successorIds;
 	
 	// The coordinates are stored as:
 	// 		lower left corner longitude, lower left corner latitude, 
@@ -123,4 +125,24 @@ public class LocationImpl implements Location {
 		result += "]";
 		return result;
 	}
+	
+	@Override
+	public String[] getSuccessorIds() {
+	    return this.successorIds;
+	}
+	
+	@Override
+	public void setSuccessorIds(String[] ids) {
+	    this.successorIds = ids;
+	}
+
+	@Override
+    public String getExpiredDate() {
+        return expiredDate;
+    }
+
+	@Override
+    public void setExpiredDate( String expiredDate ) {
+        this.expiredDate = expiredDate;
+    }
 }

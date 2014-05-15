@@ -137,4 +137,29 @@ public interface Location {
 	 * @return true if location is expired. DEFAULT is false (not expired)(utilized in SNS)
 	 */
 	public boolean getIsExpired();
+	
+	/**
+	 * Get the id of the successor of a location in case it is expired.
+	 * @return the id of the successor
+	 */
+	public String[] getSuccessorIds();
+	
+	/**
+	 * Set the id of the successor of a location.
+	 * @param id is the id of the successor
+	 */
+	public void setSuccessorIds(String[] ids);
+
+	/**
+	 * Get the date when this location is going to be expired. This date can also
+	 * be set if the location is not yet expired.
+	 * @return
+	 */
+    public String getExpiredDate();
+
+    /**
+     * Set the expired date of a location as a timestamp string.
+     * @param expiredDate
+     */
+    void setExpiredDate( String expiredDate );
 }

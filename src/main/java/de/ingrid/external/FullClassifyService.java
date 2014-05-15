@@ -40,8 +40,8 @@ public interface FullClassifyService {
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_autoclassifyurl.html?lang=en
      * </ul>
      * @param url The url to analyze.
-     * @param analyzeMaxWords The maximal number of words to analyze (body)
-     * @param ignoreCase Set to true to ignore capitalization of the document.
+     * @param analyzeMaxWords NOT USED: The maximal number of words to analyze (body)
+     * @param ignoreCase NOT USED: Set to true to ignore capitalization of the document.
      * @param filter Pass null to extract all information possible ? If only partial data
      * 		should be extracted pass according filter type.
      * @param language language of the web page and the results.
@@ -64,8 +64,8 @@ public interface FullClassifyService {
      * <li>when using SNS here's the method called: http://www.semantic-network.de/doc_autoclassifytext.html?lang=en
      * </ul>
      * @param text any kind of text to classify
-     * @param analyzeMaxWords The maximal number of words to analyze
-     * @param ignoreCase Set to true to ignore capitalization of the document.
+     * @param analyzeMaxWords NOT USED: The maximal number of words to analyze
+     * @param ignoreCase NOT USED: Set to true to ignore capitalization of the document.
      * @param filter Pass null to extract all infos possible ? If only partial data
      * 		should be extracted pass according filter type.</br>
      * 		NOTICE: When filtering TERMS or LOCATIONS the result equals
