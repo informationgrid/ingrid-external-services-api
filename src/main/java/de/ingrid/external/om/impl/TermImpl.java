@@ -31,94 +31,114 @@ import de.ingrid.external.om.Term;
  */
 public class TermImpl implements Term {
 
-	private String id;
-	private String name;
-	private TermType type;
-	/**	SNS -> GEMET ID if present */
-	private String alternateId; 
-	/**	SNS -> UMTHES name if different from GEMET name */
-	private String alternateName; 
-	private List<String> inspireThemes;
+    protected String id;
+    protected String name;
+    protected TermType type;
+    /** SNS -> GEMET ID if present */
+    protected String alternateId;
+    /** SNS -> UMTHES name if different from GEMET name */
+    protected String alternateName;
+    protected List<String> inspireThemes;
 
-	public TermImpl() {}
+    public TermImpl() {}
 
-	public TermImpl(String id, String name, TermType type) {
-		this.id = id;
-		this.name = name;
-		this.type = type;
-	}
+    public TermImpl(String id, String name, TermType type) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+    }
 
-	@Override
-	public String getAlternateId() {
-		return alternateId;
-	}
+    @Override
+    public String getAlternateId() {
+        return alternateId;
+    }
 
-	@Override
-	public String getAlternateName() {
-		return alternateName;
-	}
+    @Override
+    public String getAlternateName() {
+        return alternateName;
+    }
 
-	@Override
-	public String getId() {
-		return id;
-	}
+    @Override
+    public String getId() {
+        return id;
+    }
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public TermType getType() {
-		return type;
-	}
+    @Override
+    public TermType getType() {
+        return type;
+    }
 
-	@Override
-	public void setAlternateId(String alternateId) {
-		this.alternateId = alternateId;
-	}
+    @Override
+    public void setAlternateId(String alternateId) {
+        this.alternateId = alternateId;
+    }
 
-	@Override
-	public void setAlternateName(String alternateName) {
-		this.alternateName = alternateName;
-	}
+    @Override
+    public void setAlternateName(String alternateName) {
+        this.alternateName = alternateName;
+    }
 
-	@Override
-	public void setId(String id) {
-		this.id = id;
-	}
+    @Override
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Override
-	public void setType(TermType type) {
-		this.type = type;
-	}
+    @Override
+    public void setType(TermType type) {
+        this.type = type;
+    }
 
-	@Override
-	public List<String> getInspireThemes() {
-		return inspireThemes;
-	}
+    @Override
+    public List<String> getInspireThemes() {
+        return inspireThemes;
+    }
 
-	@Override
-	public void setInspireThemes(List<String> inspireThemes) {
-		this.inspireThemes = inspireThemes;
-	}
+    @Override
+    public void setInspireThemes(List<String> inspireThemes) {
+        this.inspireThemes = inspireThemes;
+    }
 
-	public String toString() {
-		String result = "[";
-		result += "ID: "+this.id;
-		result += ", Name: "+this.name;
-		result += ", Type: "+this.type;
-		result += ", alternateId: "+this.alternateId;
-		result += ", alternateName: "+this.alternateName;
-		if (this.inspireThemes != null && this.inspireThemes.size() > 0) {
-			result += ", inspireThemes: "+this.inspireThemes;
-		}
-		result += "]";
-		return result;
-	}
+    public String toString() {
+        String result = "[";
+        result += "ID: " + this.id;
+        result += ", Name: " + this.name;
+        result += ", Type: " + this.type;
+        result += ", alternateId: " + this.alternateId;
+        result += ", alternateName: " + this.alternateName;
+        if (this.inspireThemes != null && this.inspireThemes.size() > 0) {
+            result += ", inspireThemes: " + this.inspireThemes;
+        }
+        result += "]";
+        return result;
+    }
+
+    /**
+     * Only compares id meaning two TermImpl are equal if they have same id !
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == null)
+            return false;
+        if (other == this)
+            return true;
+        if (!(other instanceof TermImpl))
+            return false;
+        TermImpl otherTermImpl = (TermImpl) other;
+        if (this.getId() != null && this.getId().equals( otherTermImpl.getId() )) {
+            return true;
+        }
+        return false;
+    }
 }
