@@ -2,7 +2,7 @@
  * **************************************************-
  * ingrid-external-services-api
  * ==================================================
- * Copyright (C) 2014 - 2015 wemove digital solutions GmbH
+ * Copyright (C) 2014 - 2017 wemove digital solutions GmbH
  * ==================================================
  * Licensed under the EUPL, Version 1.1 or – as soon they will be
  * approved by the European Commission - subsequent versions of the
@@ -32,40 +32,44 @@ import de.ingrid.external.om.TreeTerm;
  */
 public class TreeTermImpl extends TermImpl implements TreeTerm {
 
-	private List<TreeTerm> parents;
-	private List<TreeTerm> children;
+    protected List<TreeTerm> parents;
+    protected List<TreeTerm> children;
 
-	@Override
-	public List<TreeTerm> getChildren() {
-		return children;
-	}
+    @Override
+    public List<TreeTerm> getChildren() {
+        return children;
+    }
 
-	@Override
-	public void addChild(TreeTerm child) {
-		if (children == null) {
-			children = new ArrayList<TreeTerm>();
-		}
-		children.add(child);
-	}
+    @Override
+    public void addChild(TreeTerm child) {
+        if (children == null) {
+            children = new ArrayList<TreeTerm>();
+        }
+        if (!this.children.contains( child )) {
+            children.add( child );
+        }
+    }
 
-	@Override
-	public List<TreeTerm> getParents() {
-		return parents;
-	}
+    @Override
+    public List<TreeTerm> getParents() {
+        return parents;
+    }
 
-	@Override
-	public void addParent(TreeTerm parent) {
-		if (parents == null) {
-			parents = new ArrayList<TreeTerm>();
-		}
-		parents.add(parent);
-	}
+    @Override
+    public void addParent(TreeTerm parent) {
+        if (parents == null) {
+            parents = new ArrayList<TreeTerm>();
+        }
+        if (!this.parents.contains( parent )) {
+            parents.add( parent );
+        }
+    }
 
-	public String toString() {
-		String result = super.toString() + " ";
-		result += "parents: "+ ((this.parents != null) ? parents.size() : null);
-		result += ", children: "+ ((this.children != null) ? children.size() : null);
+    public String toString() {
+        String result = super.toString() + " ";
+        result += "parents: " + ((this.parents != null) ? parents.size() : null);
+        result += ", children: " + ((this.children != null) ? children.size() : null);
 
-		return result;
-	}
+        return result;
+    }
 }
