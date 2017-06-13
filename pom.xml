@@ -9,7 +9,7 @@
   <groupId>de.ingrid</groupId>
   <artifactId>ingrid-external-services-api</artifactId>
   <packaging>jar</packaging>
-  <version>4.0.3-SNAPSHOT</version>
+  <version>4.0.3</version>
   <name>ingrid-external-services-api</name>
   <scm>
     <connection>scm:git:git@github.com:informationgrid/ingrid-external-services-api.git</connection>
