@@ -6,10 +6,9 @@
     <version>5.0.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>de.ingrid</groupId>
   <artifactId>ingrid-external-services-api</artifactId>
   <packaging>jar</packaging>
-  <version>4.3.0-SNAPSHOT</version>
+  <version>5.15.0-SNAPSHOT</version>
   <name>ingrid-external-services-api</name>
   <scm>
     <connection>scm:git:git@github.com:informationgrid/ingrid-external-services-api.git</connection>
@@ -31,7 +30,7 @@
   </build>
   <!-- NEVER DELETE: InGrid repo needed for download of base pom if not present ! -->
   <repositories>
-	<repository>
+    <repository>
       <id>nexus</id>
       <name>Nexus Repo</name>
       <url>https://nexus.informationgrid.eu/repository/maven-public</url>
